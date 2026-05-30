@@ -121,6 +121,44 @@ svg{display:block;width:100%;height:auto}
 .kw span{font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--txt2);
   background:var(--panel2);border:1px solid var(--line);padding:3px 7px;border-radius:6px}
 
+.overlay{position:fixed;inset:0;background:rgba(5,6,10,.72);backdrop-filter:blur(6px);
+  display:none;align-items:flex-start;justify-content:center;z-index:50;padding:40px 18px;overflow-y:auto}
+.overlay.open{display:flex}
+.sheet{width:100%;max-width:860px;background:linear-gradient(180deg,#12151f,#0d101a);
+  border:1px solid var(--line);border-radius:20px;padding:0;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);animation:rise .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.sh-head{padding:26px 30px 22px;position:relative;border-bottom:1px solid var(--line)}
+.sh-head .clu{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.sh-head h2{font-size:30px;font-weight:600;letter-spacing:-.02em;margin-top:6px}
+.sh-close{position:absolute;top:22px;right:24px;width:34px;height:34px;border-radius:9px;
+  border:1px solid var(--line);background:var(--panel2);color:var(--txt2);font-size:17px;cursor:pointer;line-height:1}
+.sh-close:hover{color:var(--txt)}
+.sh-ring{position:absolute;top:24px;right:72px;width:58px;height:58px}
+.sh-ring .rv{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:16px}
+.sh-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.sh-kpi{background:var(--panel);padding:16px 20px}
+.sh-kpi .l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3)}
+.sh-kpi .n{font-size:15px;font-weight:500;margin-top:5px}
+.sh-body{padding:24px 30px 30px}
+.sh-body h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin:20px 0 12px}
+.sh-body h4:first-child{margin-top:4px}
+.opp{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.opp:first-of-type{border-top:0}
+.opp .rk{font-family:'JetBrains Mono',monospace;font-size:12px;width:26px;flex:0 0 26px;text-align:right;opacity:.6}
+.opp .tt{font-size:14px;color:var(--txt)}
+.opp.top .tt{font-weight:600}
+.opp.top .tt::after{content:" ★";font-size:11px}
+.kwrow{display:grid;grid-template-columns:1fr 70px 56px;align-items:center;gap:12px;padding:7px 0}
+.kwrow .kk{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kwrow .bark{height:9px;border-radius:5px;background:var(--panel2);position:relative;overflow:hidden;grid-column:1/-1;margin-top:-2px}
+.kwrow .bark i{position:absolute;left:0;top:0;height:100%;border-radius:5px;display:block}
+.kwrow .vk{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--txt);text-align:right}
+.kwrow .ck{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);text-align:right}
+.kwblock{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-top:1px solid var(--line)}
+.kwblock:first-of-type{border-top:0}
+.kwtop{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:baseline}
+@media(max-width:600px){.sh-kpis{grid-template-columns:1fr}.sh-head h2{font-size:23px}.sh-ring,.sh-close{position:static;display:inline-flex;margin-top:10px}}
 footer{padding:48px 0 70px;color:var(--txt3);font-size:12.5px;font-weight:300;line-height:1.7}
 footer b{color:var(--txt2);font-weight:500}
 .methbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt2);line-height:1.8}
@@ -152,7 +190,7 @@ footer b{color:var(--txt2);font-weight:500}
     </div>
     <div class="fanbox">
       <div class="hint" id="hint">Mercado editorial KDP — 12 nichos activos</div>
-      <svg id="fan" viewBox="0 0 1280 760" aria-label="Abanico de oportunidad"></svg>
+      <svg id="fan" viewBox="0 0 1180 600" aria-label="Abanico de oportunidad"></svg>
       <svg id="flow" viewBox="0 0 1280 760" aria-label="Flujo Sankey" style="display:none"></svg>
       <svg id="bubbles" viewBox="0 0 1280 760" aria-label="Burbujas" style="display:none"></svg>
       <svg id="matrix" viewBox="0 0 1280 760" aria-label="Matriz" style="display:none"></svg>
@@ -179,6 +217,10 @@ footer b{color:var(--txt2);font-weight:500}
     </div>
     <p style="margin-top:18px">Fuente de datos: <b>Helium 10</b> (Cerebro · Magnet · Xray · Review Insights) sobre 11 marketplaces de Amazon (ES, COM, MX, UK, DE, FR, IT, BR, CA, AU, IN). Las estimaciones de ventas e ingresos son aproximaciones basadas en BSR y volúmenes de búsqueda; varían según el método de cada informe. Documento generado a partir de la carpeta <b>Investigación editorial</b> · Mayo 2026.</p>
   </footer>
+</div>
+
+<div id="overlay" class="overlay" aria-hidden="true">
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 </div>
 
 <script>
@@ -216,31 +258,67 @@ const DATA=[
   ingresos:"$7.200–10.800 /mes",demanda:"Alta — interpretación y ciencia del sueño",competencia:"Muy baja",tendencia:"Ciencia del sueño · sueños lúcidos",oportunidades:25,top:"Ciencia de los sueños (Divulgador)",kw:["interpretación sueños","sueños lúcidos","significado de los sueños","ciencia del sueño"]}
 ];
 
+/* ---------- DETALLE POR NICHO (datos Helium 10) ---------- */
+const DETAIL={
+ "salud-mujer":{cpc:"€0,08–0,65 · oro <€0,28",busq:"≈100.000+/mes (cabecera ES)",ing:"€15.000–22.000 /título·mes",
+  o:["Cycle syncing nativo en español","Brain fog perimenopáusico","Endometriosis práctica en español","PAS mujer: alta sensibilidad femenina","SOP: protocolo natural","Vaginismo: del dolor al placer","Matrescence: nacer madre","Adolescencia y primera menstruación","Tiroides femenino: Hashimoto","Menopausa sem drama (Brasil)"],
+  k:[["menopausia libro","25–35k","0,65€"],["dependencia emocional mujer","18–28k","0,48€"],["endometriosis libro","15–22k","0,55€"],["perimenopausia libro","12–18k","0,52€"],["alta sensibilidad mujer","5,2–8k","0,25€"],["niebla mental menopausia","4,5–7,5k","0,15€"],["SOP libro","4,2–6,8k","0,28€"]]},
+ "espiritualidad":{cpc:"Muy bajo · CI=3",busq:"502.911 /mes (categoría ES)",ing:"$4.800–5.250 /mes",
+  o:["Espiritualidad para escépticos","Meditación para hombres","Budismo práctico sin religión","Experiencias cercanas a la muerte","Neurociencia del despertar","Sentido: logoterapia moderna","Física de la conciencia sin pseudociencia","Espiritualidad y duelo","El momento: guía práctica de Tolle","Agnosticismo espiritual"],
+  k:[["morir para ser yo","50.000","—"],["el poder del ahora","8.811","—"],["cómo dejar de pensar demasiado","8.471","—"],["camino del hombre superior","20.000","—"],["david deida","1.316 (+67%)","—"],["mindfulness","495","—"]]},
+ "inteligencia":{cpc:"€0,15–0,42",busq:"91.821 /mes ES · 2,99M COM",ing:"$8.400–12.000 /mes",
+  o:["IE para hombres, sin eufemismos","IE en la era de la IA","Libro breve anti-rumiación","Pensamiento crítico vs fake news","IE para crianza digital","Neurociencia aplicada compacta","IE post-pandemia","Liderazgo emocional","Leer a las personas (enfoque hispano)","Inteligencias múltiples para padres"],
+  k:[["dont believe everything (COM)","32.517","0,42$"],["mi psicóloga me dijo libro","16.926","0,15€"],["cómo dejar de pensar demasiado","8.471","0,18€"],["ia inteligencia humana","876 (+52%)","0,25€"],["inteligencia emocional hombres","287 (+32%)","0,20€"]]},
+ "relaciones":{cpc:"Bajo",busq:"Muy alta · apego · narcisismo",ing:"$15.000–30.000 /mes",
+  o:["Apego ansioso: manual para mujeres","Después del narcisista: protocolo","Codependencia: deja de perder tu vida","Gaslighting: cuando dudas de tu realidad","Cómo salir de una relación tóxica","Apego evitativo masculino","Apego ansioso workbook","Love bombing y señales","Codependencia masculina","La soledad masculina"],
+  k:[["relación tóxica","keyword #1 ES","—"],["narcisismo","top-5 YouTube ES","—"],["apego libro","alta","—"],["codependencia","alta","—"],["gaslighting","viral ↑↑↑","—"]]},
+ "adicciones":{cpc:"$0,36–0,85 · emergentes <$0,55",busq:"Alta · dejar de beber · dopamina",ing:"$19.200–28.800 /mes",
+  o:["Sober curious en español","La mente desnuda (alcohol)","Adicción al porno sin vergüenza","Dopamina y adicción digital","El adolescente enganchado","Ayudar a un ser querido con adicción","No son 12 pasos","El hambre que no es hambre (trauma)","Sober en España","Workaholic"],
+  k:[["dejar de beber libro","4.200","0,85$"],["adicción alcohol libro","3.800","0,78$"],["dopamina libro","2.200","0,65$"],["sober curious libro","1.200 (+120%)","0,45$"],["adicción pornografía libro","1.100 (+200%)","0,55$"]]},
+ "salud-mental":{cpc:"€0,55–0,70 (nicho s. nervioso)",busq:"autoayuda 5.670 · ansiedad 2.530",ing:"€2.250–5.700 /mes",
+  o:["Despierta tu nervio vago","Neurociencia del bienestar (sin religión)","Ansiedad generación Z","Burnout para hombres","Carnegie para el siglo XXI","Duerme en 30 días","El cuerpo guarda la memoria (accesible)","Hábitos para la salud mental","Inflamación silenciosa","No es estrés, es tu sistema nervioso"],
+  k:[["autoayuda","5.670","—"],["crecimiento personal","4.890","—"],["ansiedad","2.530","—"],["sistema nervioso","1.890","0,65€"],["reprogramar el cerebro","890","0,70€"],["nervio vago libro","560","0,68€"]]},
+ "rendimiento":{cpc:"Bajo · alta conversión B2B",busq:"OKRs 890 · manager 3.200 /mes",ing:"$30.000–60.000 /mes",
+  o:["OKRs para pymes: guía práctica","La empresa familiar profesionalizada","El manager que nadie enseñó a ser","Escala: de hacer todo tú a un equipo","Equipos remotos de alto rendimiento","Feedback radical en español","La empresa que aprende","Los números que importan (KPIs)","El liderazgo sin americanismos","La reunión que vale"],
+  k:[["el manager (primer manager)","3.200","bajo"],["okr libro español","890","bajo"],["cultura empresa libro","—","bajo"],["escalar negocio","—","—"],["equipos remotos protocolo","↑↑ post-COVID","—"]]},
+ "ansiedad":{cpc:"€0,38–0,72",busq:"90.200 /mes (ansiedad ES)",ing:"€1.800–3.000 /título·mes",
+  o:["Ansiedad masculina workbook","Nervio vago para la ansiedad","Ansiedad digital y dopamina","Overthinking workbook en español","Ansiedad social TCC","El manual de los ataques de pánico","Ansiedad teen (y sus padres)","Ansiedad en alemán (DE)","Ansiedad y sistema nervioso (Brasil)","ACT para overthinking"],
+  k:[["ansiedad","90.200","0,72€"],["ansiedad social","28.400","0,58€"],["ataques de pánico","19.800","—"],["overthinking español","14.200 (+67%)","0,49€"],["nervio vago ejercicios","9.800 (+89%)","0,45€"],["dopamina redes sociales","8.900","0,42€"],["ansiedad masculina libro","3.200 (+120%)","0,38€"]]},
+ "apoyo-enfermedad":{cpc:"€0,15–0,31",busq:"fibromialgia 2.400 · duelo 1.800",ing:"$2.400–4.000 /mes",
+  o:["El manual del cuidador","Duelo honesto (sin 5 fases)","Después del cáncer","Vivir con fibromialgia / fatiga crónica","Tú también importas (autocuidado)","Familia en crisis","Paciente empoderado","Lo que tu oncólogo no te dice","Duelo real","El último acompañamiento"],
+  k:[["fibromialgia libro","2.400","0,19€"],["duelo libro","1.800","—"],["cuidador familiar libro","1.200","0,22€"],["superviviente cáncer guía","1.200","—"],["apoyo cáncer familia","1.100","0,31€"],["vida después del cáncer","980","—"],["burnout cuidador libro","600 (↑↑↑)","0,15€"]]},
+ "burnout":{cpc:"€0,28–0,45",busq:"burnout 1.780 · materno 90 (0 libros)",ing:"$5.760–8.640 /mes",
+  o:["Burnout materno","Burnout para hombres","El reset de 8 semanas","El emprendedor quemado","Workbook anti-burnout 90 días","Quiet quitting","Burnout digital","No eres vago, estás quemado","El ciclo del estrés","Burnout: diagnóstico y protocolo médico"],
+  k:[["burnout libro","320","0,45€"],["agotamiento emocional libro","150","0,42€"],["burnout materno","90 (0 libros)","0,35€"],["quiet quitting libro","80 (0 libros)","0,28€"],["burnout emprendedor","60","0,32€"],["workbook burnout","60","0,35€"]]},
+ "estres-postraumatico":{cpc:"Bajo · CI=0 en ES",busq:"trauma 26.248 ES · somatic 1,76M COM",ing:"$3.600–7.200 /mes",
+  o:["El workbook del trauma (somático)","Sana tu trauma con el cuerpo","El trauma que no sabes que tienes (ACEs)","El trauma de mis abuelos (intergeneracional)","Tu cuerpo recuerda (principiantes)","El cuerpo en guardia (teoría polivagal)","Trauma y amor (apego)","Crecer del trauma (PTG)","PTSD en uniforme","El trauma en el cerebro"],
+  k:[["somatic healing (COM, cluster)","1,76M","—"],["libro el cuerpo lleva la cuenta","CI 21.500","—"],["teoría polivagal aplicada","CI 19.167","—"],["entender y evaluar el apego","CI 17.143","—"],["sanación somática libro","CI=0 ↑↑↑","—"],["workbook trauma español","CI=0","—"]]},
+ "suenos":{cpc:"Bajo",busq:"interpretación 520 · lúcidos ↑↑",ing:"$7.200–10.800 /mes",
+  o:["Sueños lúcidos: guía científica definitiva","Pesadillas: entiende y supera tus miedos","Mi diario de sueños (52 semanas)","Interpretación basada en evidencia","Sueños lúcidos para niños","El inconsciente en sueños: Jung digital","Sonhos lúcidos (Brasil)","Sogni lucidi (Italia)","Rêves lucides (Francia)","Traumtagebuch (Alemania)"],
+  k:[["interpretación sueños libro","520","—"],["sueños lúcidos","↑↑ creciente","—"],["significado de los sueños","alta","—"],["sueños infantiles significado","220 (+28%)","—"],["diccionario de los sueños","520","—"]]}
+};
+
 /* ---------- FAN CHART ---------- */
 const NS="http://www.w3.org/2000/svg";
 const svg=document.getElementById("fan");
-const W=1280,H=760, cx=210, cy=H/2;
+const W=1180,H=600, cx=140, cy=H/2;
 const idx=DATA.map(d=>d.indice);
 const minI=Math.min(...idx),maxI=Math.max(...idx);
-const rScale=v=>14+ (v-minI)/(maxI-minI)*34;          // node radius 14..48
-const fScale=v=>13+ (v-minI)/(maxI-minI)*9;            // label font 13..22
-const a0=-64*Math.PI/180, a1=64*Math.PI/180;
+const rScale=v=>9+ (v-minI)/(maxI-minI)*13;           // node radius 9..22
+const fScale=v=>11+ (v-minI)/(maxI-minI)*6;            // label font 11..17
 const N=DATA.length;
-const R=Math.min(560, W-cx-360);
+const nodeX=520, topM=42, usableH=H-2*topM;
 
 function make(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
 
 const layout=DATA.map((d,i)=>{
-  const t=N===1?0.5:i/(N-1);
-  const ang=a0+(a1-a0)*t;
-  const x=cx+Math.cos(ang)*R, y=cy+Math.sin(ang)*R;
-  return {...d,ang,x,y};
+  const y=topM + i*(usableH/(N-1));
+  return {...d,x:nodeX,y};
 });
 
 // edges
 layout.forEach(d=>{
-  const mx=cx+(d.x-cx)*0.5;
-  const path=`M ${cx} ${cy} C ${cx+120} ${cy}, ${mx} ${d.y}, ${d.x} ${d.y}`;
+  const path=`M ${cx} ${cy} C ${cx+170} ${cy}, ${d.x-170} ${d.y}, ${d.x} ${d.y}`;
   const sw=2+ (d.indice-minI)/(maxI-minI)*5;
   const e=make("path",{d:path,class:"edge","data-id":d.id,stroke:d.color,"stroke-width":sw,"stroke-opacity":.55});
   svg.appendChild(e);
@@ -248,9 +326,9 @@ layout.forEach(d=>{
 
 // hub
 const hub=make("g",{class:"hub"});
-hub.appendChild(make("circle",{cx,cy,r:54}));
-const ht1=make("text",{x:cx,y:cy-6,"font-size":12,"font-family":"JetBrains Mono",fill:"#9aa3b8"});ht1.textContent="MERCADO";
-const ht2=make("text",{x:cx,y:cy+12,"font-size":13,"font-weight":600});ht2.textContent="KDP · 12";
+hub.appendChild(make("circle",{cx,cy,r:46}));
+const ht1=make("text",{x:cx,y:cy-5,"font-size":10,"font-family":"JetBrains Mono",fill:"#9aa3b8"});ht1.textContent="MERCADO";
+const ht2=make("text",{x:cx,y:cy+12,"font-size":12,"font-weight":600});ht2.textContent="KDP · 12";
 hub.appendChild(ht1);hub.appendChild(ht2);
 svg.appendChild(hub);
 
@@ -260,10 +338,10 @@ layout.forEach(d=>{
   const r=rScale(d.indice);
   g.appendChild(make("circle",{cx:d.x,cy:d.y,r:r+5,fill:d.color,"fill-opacity":.12}));
   g.appendChild(make("circle",{cx:d.x,cy:d.y,r,fill:d.color,"fill-opacity":.9,stroke:"#0a0c12","stroke-width":2}));
-  const vt=make("text",{x:d.x,y:d.y+4,class:"node-val","text-anchor":"middle","font-size":Math.max(11,r*0.62),fill:"#0a0c12"});
+  const vt=make("text",{x:d.x,y:d.y+4,class:"node-val","text-anchor":"middle","font-size":Math.max(9,r*0.56),fill:"#0a0c12"});
   vt.textContent=d.indice; g.appendChild(vt);
   // label
-  const lx=d.x+r+12;
+  const lx=d.x+r+11;
   const lbl=make("text",{x:lx,y:d.y-2,class:"node-lbl","data-id":d.id,"font-size":fScale(d.indice),"font-weight":600,"dominant-baseline":"middle"});
   lbl.textContent=d.nombre; g.appendChild(lbl);
   const sub=make("text",{x:lx,y:d.y+fScale(d.indice)-1,class:"node-sub","dominant-baseline":"middle"});
@@ -272,7 +350,7 @@ layout.forEach(d=>{
 
   g.addEventListener("mouseenter",()=>focus(d.id));
   g.addEventListener("mouseleave",clearFocus);
-  g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+  g.addEventListener("click",()=>openDetail(d.id));
 });
 
 const hintEl=document.getElementById("hint");
@@ -312,7 +390,8 @@ const grid=document.getElementById("grid");
 const SUB=[["D","Demanda"],["G","Brecha"],["P","Prof."],["R","Ingresos"]];
 DATA.forEach(d=>{
   const c=document.createElement("div");c.className="card";c.id="card-"+d.id;
-  c.style.borderTop="2px solid "+d.color;
+  c.style.borderTop="2px solid "+d.color;c.style.cursor="pointer";
+  c.addEventListener("click",()=>openDetail(d.id));
   const circ=2*Math.PI*22, off=circ*(1-d.indice/100);
   const subbars=SUB.map(([k,lab])=>`<div class="sbcol"><div class="bw"><div class="b" style="height:${d[k]*10}%;background:${d.color}"></div></div><div class="lab">${k}</div></div>`).join("");
   const kws=d.kw.map(k=>`<span>${k}</span>`).join("");
@@ -336,6 +415,46 @@ DATA.forEach(d=>{
   grid.appendChild(c);
 });
 function flash(id){const el=document.getElementById("card-"+id);el.animate([{boxShadow:"0 0 0 0 "+DATA.find(d=>d.id===id).color+"00"},{boxShadow:"0 0 0 3px "+DATA.find(d=>d.id===id).color+"66"},{boxShadow:"0 0 0 0 transparent"}],{duration:1200});}
+
+/* ---------- FICHA AMPLIADA (modal) ---------- */
+const overlay=document.getElementById("overlay");
+const sheet=document.getElementById("sheet");
+function pv(s){if(!s)return 0;const m=s.replace(/\./g,'').match(/([0-9]+(?:,[0-9]+)?)/);if(!m)return 0;let n=parseFloat(m[1].replace(',','.'));if(/m/i.test(s))n*=1e6;else if(/k/i.test(s))n*=1e3;return n;}
+function openDetail(id){
+ const d=DATA.find(x=>x.id===id), det=DETAIL[id]; if(!d||!det)return;
+ const circ=2*Math.PI*24, off=circ*(1-d.indice/100);
+ const opps=det.o.map((t,i)=>`<div class="opp ${i===0?'top':''}"><span class="rk" style="color:${i===0?d.color:''}">${i+1}</span><span class="tt">${t}</span></div>`).join("");
+ const maxv=Math.max(1,...det.k.map(k=>pv(k[1])));
+ const kws=det.k.map(k=>{const w=Math.round(pv(k[1])/maxv*100);
+   return `<div class="kwblock"><div class="kwtop"><span class="kk">${k[0]}</span><span class="vk">${k[1]}</span><span class="ck">${k[2]||''}</span></div><div class="bark"><i style="width:${w}%;background:${d.color}"></i></div></div>`;}).join("");
+ const SUB=[["D","Demanda",d.D],["G","Brecha",d.G],["P","Profundidad",d.P],["R","Ingresos",d.R]];
+ const sub=SUB.map(s=>`<div class="sbcol"><div class="bw"><div class="b" style="height:${s[2]*10}%;background:${d.color}"></div></div><div class="lab">${s[0]} ${s[2]}</div></div>`).join("");
+ sheet.innerHTML=`
+  <div class="sh-head" style="border-bottom:1px solid var(--line)">
+    <div class="clu" style="color:${d.color}">${CLUSTERS[d.cluster].nombre}</div>
+    <h2>${d.nombre}</h2>
+    <div class="sh-ring"><svg viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#1c2130" stroke-width="5"/><circle cx="29" cy="29" r="24" fill="none" stroke="${d.color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}" transform="rotate(-90 29 29)"/></svg><div class="rv" style="color:${d.color}">${d.indice}</div></div>
+    <button class="sh-close" onclick="closeDetail()">✕</button>
+  </div>
+  <div class="sh-kpis">
+    <div class="sh-kpi"><div class="l">Búsquedas categoría</div><div class="n">${det.busq}</div></div>
+    <div class="sh-kpi"><div class="l">CPC medio</div><div class="n">${det.cpc}</div></div>
+    <div class="sh-kpi"><div class="l">Ingresos est.</div><div class="n">${det.ing}</div></div>
+  </div>
+  <div class="sh-body">
+    <h4>Titulares de oportunidad — ${d.oportunidades} detectadas</h4>
+    ${opps}
+    <h4>Keywords clave · volumen mensual · CPC</h4>
+    ${kws}
+    <h4>Desglose del índice (${d.indice}/100)</h4>
+    <div class="subbars" style="max-width:300px">${sub}</div>
+    <p style="font-size:11px;color:var(--txt3);margin-top:18px;font-family:'JetBrains Mono',monospace">Fuente: Helium 10 · ${d.competencia} competencia · tendencia: ${d.tendencia}</p>
+  </div>`;
+ overlay.classList.add("open"); overlay.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden";
+}
+function closeDetail(){overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow="";}
+overlay.addEventListener("click",e=>{if(e.target===overlay)closeDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
 
 /* ---------- SANKEY / FLUJO ---------- */
 const TEMA=[
@@ -428,7 +547,7 @@ function buildFlow(){
   flow.appendChild(g);
   g.addEventListener("mouseenter",()=>focusFlow(hid));
   g.addEventListener("mouseleave",clearFlow);
-  g.addEventListener("click",()=>{document.getElementById("card-"+hid).scrollIntoView({behavior:"smooth",block:"center"});flash(hid);});
+  g.addEventListener("click",()=>openDetail(hid));
  });
  // nodes col3
  PERFIL.forEach(p=>{const n=N3[p.id];const g=make("g",{class:"snode"});
@@ -473,7 +592,7 @@ function buildBubbles(){
    bub.appendChild(g);
    g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+d.tendencia;hintEl.style.color=d.color;});
    g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";});
-   g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+   g.addEventListener("click",()=>openDetail(d.id));
   });
  });
 }
@@ -507,7 +626,7 @@ function buildMatrix(){
    mtx.appendChild(g);
    g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+t.nombre;hintEl.style.color=d.color;});
    g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";});
-   g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+   g.addEventListener("click",()=>openDetail(d.id));
    yy+=rh;
   });
   // tema label
