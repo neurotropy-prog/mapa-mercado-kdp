@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de Oportunidad Editorial · Mercado KDP · Mayo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c12; --bg2:#0e1119; --panel:#12151f; --panel2:#161a26;
+  --line:#222838; --txt:#e8ecf4; --txt2:#9aa3b8; --txt3:#5c6478;
+  --accent:#7FD0E0;
+  --c-mujer:#D6418E; --c-apoyo:#E873A8;
+  --c-espir:#8C6BD8; --c-relac:#A982E0;
+  --c-intel:#1FB89A; --c-rend:#54C79E;
+  --c-adic:#EF7E3C; --c-burn:#F2A93E;
+  --c-smental:#2E7FD0; --c-ansi:#3F97DE; --c-trauma:#5FBCEA; --c-suenos:#86D3EC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+/* HERO HEADER */
+header{padding:54px 0 14px;text-align:left;position:relative}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--txt3);margin-bottom:16px}
+h1{font-size:clamp(30px,5vw,52px);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+h1 .grad{background:linear-gradient(95deg,#D6418E,#8C6BD8 35%,#2E7FD0 60%,#1FB89A);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--txt2);font-size:16px;max-width:680px;margin-top:16px;font-weight:300}
+
+/* KPI STRIP */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:38px 0 8px}
+.kpi{background:var(--panel);padding:20px 18px}
+.kpi .n{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--txt3);margin-top:6px}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* SECTION TITLES */
+.sec{padding:46px 0 8px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sec-h h2{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.sec-h .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);letter-spacing:.1em}
+.sec-d{color:var(--txt2);font-size:14px;font-weight:300;max-width:720px;margin-bottom:8px}
+
+/* FAN CHART */
+.fanbox{position:relative;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(120% 120% at 18% 50%,#10141f 0%,var(--bg2) 55%,#090b11 100%);
+  overflow:hidden;margin-top:18px}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:16px 22px 20px;border-top:1px solid var(--line)}
+.lg{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--txt2)}
+.lg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.hint{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);
+  padding:14px 22px 0;letter-spacing:.04em}
+
+.modes{display:inline-flex;gap:6px;background:var(--panel);border:1px solid var(--line);
+  border-radius:11px;padding:5px;margin-top:16px}
+.mode-btn{font-family:'Space Grotesk';font-size:13px;font-weight:500;color:var(--txt2);
+  background:transparent;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;transition:.2s}
+.mode-btn:hover{color:var(--txt)}
+.mode-btn.active{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px #2c3346}
+.ribbon{transition:opacity .25s;cursor:pointer}
+.snode rect{transition:opacity .25s}
+.snode text{font-family:'Space Grotesk';fill:var(--txt)}
+.svlabel{font-family:'JetBrains Mono',monospace;fill:var(--txt3)}
+.col-h{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;fill:var(--txt3)}
+.edge{fill:none;stroke-linecap:round;transition:opacity .25s,stroke-width .25s}
+.node-c{cursor:pointer;transition:transform .25s}
+.node-lbl{cursor:pointer;font-family:'Space Grotesk';fill:var(--txt);transition:opacity .25s}
+.node-val{font-family:'JetBrains Mono',monospace;font-weight:500}
+.node-sub{font-family:'JetBrains Mono',monospace;fill:var(--txt3);font-size:11px}
+.dim{opacity:.16}
+.hub circle{fill:#0c0e15;stroke:#2a3142;stroke-width:1.5}
+.hub text{fill:var(--txt);text-anchor:middle;font-family:'Space Grotesk'}
+
+/* RANK BARS */
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:20px}
+.bar{display:grid;grid-template-columns:200px 1fr 46px;align-items:center;gap:14px}
+.bar .nm{font-size:13.5px;color:var(--txt);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .track{height:13px;background:var(--panel2);border-radius:7px;overflow:hidden}
+.bar .fill{height:100%;border-radius:7px;transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
+.bar .v{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--txt2);text-align:right}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:760px){.bar{grid-template-columns:120px 1fr 40px;gap:10px}.bar .nm{font-size:12px}}
+
+/* FICHAS GRID */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;
+  position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:#2f3span}
+.card:hover{border-color:#333b50}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card h3{font-size:17px;font-weight:600;letter-spacing:-.01em;max-width:78%}
+.ring{position:relative;width:54px;height:54px;flex:0 0 54px}
+.ring svg{width:54px;height:54px}
+.ring .rv{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500}
+.card .cluster{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;margin-top:2px;opacity:.85}
+.rowm{display:flex;justify-content:space-between;font-size:12.5px;padding:7px 0;border-top:1px solid var(--line)}
+.rowm .k{color:var(--txt3)}.rowm .vv{color:var(--txt);text-align:right;max-width:62%}
+.card .top-opp{font-size:13px;color:var(--txt2);margin:12px 0 4px;font-weight:300}
+.card .top-opp b{color:var(--txt);font-weight:500}
+.subbars{display:flex;gap:6px;margin-top:14px}
+.sbcol{flex:1;text-align:center}
+.sbcol .bw{height:42px;display:flex;align-items:flex-end;justify-content:center}
+.sbcol .b{width:100%;border-radius:4px 4px 0 0;animation:grow2 1s ease both}
+@keyframes grow2{from{height:0}}
+.sbcol .lab{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--txt3);margin-top:5px;letter-spacing:.06em}
+.kw{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+.kw span{font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--txt2);
+  background:var(--panel2);border:1px solid var(--line);padding:3px 7px;border-radius:6px}
+
+footer{padding:48px 0 70px;color:var(--txt3);font-size:12.5px;font-weight:300;line-height:1.7}
+footer b{color:var(--txt2);font-weight:500}
+.methbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--txt2);line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Investigación editorial · Amazon KDP · Helium 10 · Mayo 2026</div>
+    <h1>Mapa de oportunidad del<br><span class="grad">mercado editorial</span></h1>
+    <p class="sub">Doce nichos, agrupados por temática emergente. El tamaño de cada nodo refleja su <b style="color:var(--txt);font-weight:500">índice de oportunidad</b>: cuanto mayor el círculo, mayor la combinación de demanda, brecha de mercado, profundidad de subnichos y potencial de ingresos.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n">12</div><div class="l">Nichos analizados</div></div>
+      <div class="kpi"><div class="n">200+</div><div class="l">Oportunidades</div></div>
+      <div class="kpi"><div class="n">11</div><div class="l">Marketplaces</div></div>
+      <div class="kpi"><div class="n">&gt;800k</div><div class="l">Búsq/mes (ES)</div></div>
+      <div class="kpi"><div class="n">5</div><div class="l">Temáticas</div></div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="sec-h"><h2 id="vizTitle">Abanico de oportunidad</h2><span class="tag" id="vizTag">/ índice 0–100 · color por temática</span></div>
+    <p class="sec-d" id="vizDesc">Pasa el cursor sobre cada rama para aislarla. El número dentro del nodo es su índice de oportunidad.</p>
+    <div class="modes">
+      <button class="mode-btn active" data-mode="fan">◐ Abanico</button>
+      <button class="mode-btn" data-mode="flow">⇄ Flujo</button>
+      <button class="mode-btn" data-mode="bubbles">◌ Burbujas</button>
+      <button class="mode-btn" data-mode="matrix">▦ Matriz</button>
+    </div>
+    <div class="fanbox">
+      <div class="hint" id="hint">Mercado editorial KDP — 12 nichos activos</div>
+      <svg id="fan" viewBox="0 0 1280 760" aria-label="Abanico de oportunidad"></svg>
+      <svg id="flow" viewBox="0 0 1280 760" aria-label="Flujo Sankey" style="display:none"></svg>
+      <svg id="bubbles" viewBox="0 0 1280 760" aria-label="Burbujas" style="display:none"></svg>
+      <svg id="matrix" viewBox="0 0 1280 760" aria-label="Matriz" style="display:none"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>Ranking por índice</h2><span class="tag">/ orden descendente</span></div>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><h2>Fichas de nicho</h2><span class="tag">/ datos Helium 10</span></div>
+    <p class="sec-d">Cada ficha resume la oportunidad principal, la demanda documentada, el nivel de competencia y el desglose del índice: <b style="color:var(--txt);font-weight:500">D</b> demanda · <b style="color:var(--txt);font-weight:500">B</b> brecha · <b style="color:var(--txt);font-weight:500">P</b> profundidad · <b style="color:var(--txt);font-weight:500">I</b> ingresos.</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>
+    <div class="sec-h"><h2 style="font-size:18px">Metodología y fuentes</h2></div>
+    <div class="methbox">
+      ÍNDICE DE OPORTUNIDAD (0–100) = Demanda·0.30 + Brecha·0.30 + Profundidad·0.20 + Ingresos·0.20<br>
+      Cada subíndice (1–10) se deriva de los datos de cada informe. El tamaño del nodo es proporcional al índice.
+    </div>
+    <p style="margin-top:18px">Fuente de datos: <b>Helium 10</b> (Cerebro · Magnet · Xray · Review Insights) sobre 11 marketplaces de Amazon (ES, COM, MX, UK, DE, FR, IT, BR, CA, AU, IN). Las estimaciones de ventas e ingresos son aproximaciones basadas en BSR y volúmenes de búsqueda; varían según el método de cada informe. Documento generado a partir de la carpeta <b>Investigación editorial</b> · Mayo 2026.</p>
+  </footer>
+</div>
+
+<script>
+const CLUSTERS={
+  mujer:{nombre:"Cuerpo & mujer"},
+  sentido:{nombre:"Sentido & vínculos"},
+  mente_rend:{nombre:"Mente & rendimiento"},
+  habitos:{nombre:"Hábitos & adicción"},
+  mente:{nombre:"Mente en crisis"}
+};
+const DATA=[
+ {id:"salud-mujer",nombre:"Salud de la Mujer",cluster:"mujer",color:"#D6418E",indice:90,D:10,G:8,P:10,R:8,
+  ingresos:"€15.000–22.000 /título·mes",demanda:"menopausia 25–35k · endometriosis 15–22k · dependencia emocional 18–28k",competencia:"Baja–Media",tendencia:"Cycle syncing · niebla mental perimenopáusica",oportunidades:25,top:"Brain fog perimenopáusico (Perfil B)",kw:["niebla mental menopausia","SOP libro","PAS mujer","cycle syncing"]},
+ {id:"apoyo-enfermedad",nombre:"Apoyo en la Enfermedad",cluster:"mujer",color:"#E873A8",indice:77,D:7,G:10,P:8,R:5,
+  ingresos:"$2.400–4.000 /mes",demanda:"fibromialgia 2.400 · duelo 1.800 · cuidador 1.200",competencia:"Muy baja (brecha 37×)",tendencia:"El cuidador invisible · duelo honesto",oportunidades:25,top:"El Manual del Cuidador (Perfil A)",kw:["cuidador familiar libro","fibromialgia libro","duelo sin fases","vida después del cáncer"]},
+ {id:"espiritualidad",nombre:"Espiritualidad",cluster:"sentido",color:"#8C6BD8",indice:87,D:10,G:9,P:8,R:7,
+  ingresos:"$4.800–5.250 /mes",demanda:"Categoría ES 502.911 búsq/mes · 'morir para ser yo' 50.000",competencia:"Casi nula (CI=3)",tendencia:"Espiritualidad para escépticos · mindfulness masculino",oportunidades:25,top:"Espiritualidad para Escépticos (Perfil A)",kw:["espiritualidad sin religión","meditación para hombres","ECM español","budismo secular"]},
+ {id:"relaciones",nombre:"Relaciones",cluster:"sentido",color:"#A982E0",indice:84,D:8,G:8,P:9,R:9,
+  ingresos:"$15.000–30.000 /mes",demanda:"Muy alta en pareja, apego y vínculos",competencia:"Baja",tendencia:"Apego · narcisismo · coaching relacional",oportunidades:25,top:"Apego y vínculos sanos (Coach relacional)",kw:["apego libro","relaciones de pareja","narcisismo","dependencia emocional"]},
+ {id:"inteligencia",nombre:"Inteligencia",cluster:"mente_rend",color:"#1FB89A",indice:85,D:9,G:8,P:9,R:8,
+  ingresos:"$8.400–12.000 /mes",demanda:"Cluster IE 91.821/mes ES · 2,99M COM",competencia:"Muy baja",tendencia:"IE masculina · IA e inteligencia humana",oportunidades:25,top:"IE para Hombres, sin eufemismos (Perfil A)",kw:["inteligencia emocional hombres","pensamiento crítico fake news","ia inteligencia humana","leer a las personas"]},
+ {id:"rendimiento",nombre:"Rendimiento Empresarial",cluster:"mente_rend",color:"#54C79E",indice:78,D:7,G:7,P:8,R:10,
+  ingresos:"$30.000–60.000 /mes",demanda:"Alta — segmento B2B premium",competencia:"Baja–Media",tendencia:"OKRs para pymes en español · EOS",oportunidades:25,top:"OKRs para pymes en español (Consultor)",kw:["okr libro español","cultura empresa libro","escalar negocio","liderazgo equipos"]},
+ {id:"adicciones",nombre:"Adicciones",cluster:"habitos",color:"#EF7E3C",indice:80,D:7,G:9,P:9,R:7,
+  ingresos:"$19.200–28.800 /mes",demanda:"dejar de beber 4.200 · sober curious 1.200 (+120%)",competencia:"Muy baja",tendencia:"Sober curious en español · dopamina digital",oportunidades:25,top:"Sober Curious en español (Perfil A)",kw:["sober curious libro","adicción pornografía","dopamine detox español","recuperación sin 12 pasos"]},
+ {id:"burnout",nombre:"Burnout",cluster:"habitos",color:"#F2A93E",indice:76,D:6,G:10,P:8,R:6,
+  ingresos:"$5.760–8.640 /mes",demanda:"burnout 1.780 · burnout materno 90 (0 libros)",competencia:"Muy baja (brecha 100×)",tendencia:"Burnout materno · burnout masculino",oportunidades:25,top:"Burnout Materno (Perfil A)",kw:["burnout materno","agotamiento emocional","burnout masculino","quiet quitting"]},
+ {id:"salud-mental",nombre:"Salud Mental",cluster:"mente",color:"#2E7FD0",indice:78,D:8,G:8,P:9,R:6,
+  ingresos:"€2.250–5.700 /mes",demanda:"ansiedad 2.530 · autoayuda 5.670 · sistema nervioso 1.890",competencia:"Baja",tendencia:"Sistema nervioso · nervio vago",oportunidades:10,top:"Despierta tu Nervio Vago (Perfil A)",kw:["sistema nervioso","nervio vago libro","regulación sistema nervioso","reprogramar el cerebro"]},
+ {id:"ansiedad",nombre:"Ansiedad",cluster:"mente",color:"#3F97DE",indice:78,D:10,G:6,P:8,R:7,
+  ingresos:"€1.800–3.000 /título·mes",demanda:"ansiedad 90.200/mes ES · overthinking 14.200 · nervio vago 9.800",competencia:"Baja–Media",tendencia:"Overthinking · ansiedad masculina · nervio vago",oportunidades:10,top:"Ansiedad Masculina Workbook (Perfil A)",kw:["ansiedad masculina libro","nervio vago ejercicios","dopamina ansiedad redes","overthinking español"]},
+ {id:"estres-postraumatico",nombre:"Estrés Postraumático",cluster:"mente",color:"#5FBCEA",indice:74,D:7,G:9,P:7,R:6,
+  ingresos:"$3.600–7.200 /mes",demanda:"cluster trauma 26.248 ES · somatic healing 1,76M COM",competencia:"Nula en ES (CI=0)",tendencia:"Sanación somática en español · ACEs",oportunidades:10,top:"El Workbook del Trauma (Perfil C)",kw:["sanación somática libro","workbook trauma español","teoría polivagal","ACEs libro"]},
+ {id:"suenos",nombre:"Sueños",cluster:"mente",color:"#86D3EC",indice:71,D:6,G:9,P:7,R:6,
+  ingresos:"$7.200–10.800 /mes",demanda:"Alta — interpretación y ciencia del sueño",competencia:"Muy baja",tendencia:"Ciencia del sueño · sueños lúcidos",oportunidades:25,top:"Ciencia de los sueños (Divulgador)",kw:["interpretación sueños","sueños lúcidos","significado de los sueños","ciencia del sueño"]}
+];
+
+/* ---------- FAN CHART ---------- */
+const NS="http://www.w3.org/2000/svg";
+const svg=document.getElementById("fan");
+const W=1280,H=760, cx=210, cy=H/2;
+const idx=DATA.map(d=>d.indice);
+const minI=Math.min(...idx),maxI=Math.max(...idx);
+const rScale=v=>14+ (v-minI)/(maxI-minI)*34;          // node radius 14..48
+const fScale=v=>13+ (v-minI)/(maxI-minI)*9;            // label font 13..22
+const a0=-64*Math.PI/180, a1=64*Math.PI/180;
+const N=DATA.length;
+const R=Math.min(560, W-cx-360);
+
+function make(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+
+const layout=DATA.map((d,i)=>{
+  const t=N===1?0.5:i/(N-1);
+  const ang=a0+(a1-a0)*t;
+  const x=cx+Math.cos(ang)*R, y=cy+Math.sin(ang)*R;
+  return {...d,ang,x,y};
+});
+
+// edges
+layout.forEach(d=>{
+  const mx=cx+(d.x-cx)*0.5;
+  const path=`M ${cx} ${cy} C ${cx+120} ${cy}, ${mx} ${d.y}, ${d.x} ${d.y}`;
+  const sw=2+ (d.indice-minI)/(maxI-minI)*5;
+  const e=make("path",{d:path,class:"edge","data-id":d.id,stroke:d.color,"stroke-width":sw,"stroke-opacity":.55});
+  svg.appendChild(e);
+});
+
+// hub
+const hub=make("g",{class:"hub"});
+hub.appendChild(make("circle",{cx,cy,r:54}));
+const ht1=make("text",{x:cx,y:cy-6,"font-size":12,"font-family":"JetBrains Mono",fill:"#9aa3b8"});ht1.textContent="MERCADO";
+const ht2=make("text",{x:cx,y:cy+12,"font-size":13,"font-weight":600});ht2.textContent="KDP · 12";
+hub.appendChild(ht1);hub.appendChild(ht2);
+svg.appendChild(hub);
+
+// nodes
+layout.forEach(d=>{
+  const g=make("g",{class:"node-c","data-id":d.id});
+  const r=rScale(d.indice);
+  g.appendChild(make("circle",{cx:d.x,cy:d.y,r:r+5,fill:d.color,"fill-opacity":.12}));
+  g.appendChild(make("circle",{cx:d.x,cy:d.y,r,fill:d.color,"fill-opacity":.9,stroke:"#0a0c12","stroke-width":2}));
+  const vt=make("text",{x:d.x,y:d.y+4,class:"node-val","text-anchor":"middle","font-size":Math.max(11,r*0.62),fill:"#0a0c12"});
+  vt.textContent=d.indice; g.appendChild(vt);
+  // label
+  const lx=d.x+r+12;
+  const lbl=make("text",{x:lx,y:d.y-2,class:"node-lbl","data-id":d.id,"font-size":fScale(d.indice),"font-weight":600,"dominant-baseline":"middle"});
+  lbl.textContent=d.nombre; g.appendChild(lbl);
+  const sub=make("text",{x:lx,y:d.y+fScale(d.indice)-1,class:"node-sub","dominant-baseline":"middle"});
+  sub.textContent=d.oportunidades+" oportunidades · "+d.competencia; g.appendChild(sub);
+  svg.appendChild(g);
+
+  g.addEventListener("mouseenter",()=>focus(d.id));
+  g.addEventListener("mouseleave",clearFocus);
+  g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+});
+
+const hintEl=document.getElementById("hint");
+function focus(id){
+  const d=DATA.find(x=>x.id===id);
+  hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+d.tendencia;
+  hintEl.style.color=d.color;
+  svg.querySelectorAll(".edge").forEach(e=>{const on=e.dataset.id===id;e.style.opacity=on?1:.1;e.setAttribute("stroke-opacity",on?.95:.1);});
+  svg.querySelectorAll(".node-c").forEach(n=>n.classList.toggle("dim",n.dataset.id!==id));
+}
+function clearFocus(){
+  hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";
+  svg.querySelectorAll(".edge").forEach(e=>{e.style.opacity=1;e.setAttribute("stroke-opacity",.55);});
+  svg.querySelectorAll(".node-c").forEach(n=>n.classList.remove("dim"));
+}
+
+/* ---------- LEGEND ---------- */
+const seen=new Set();const leg=document.getElementById("legend");
+DATA.forEach(d=>{ if(seen.has(d.cluster))return;seen.add(d.cluster);
+  const el=document.createElement("div");el.className="lg";
+  el.innerHTML=`<i style="background:${d.color}"></i>${CLUSTERS[d.cluster].nombre}`;
+  leg.appendChild(el);
+});
+
+/* ---------- RANK BARS ---------- */
+const bars=document.getElementById("bars");
+[...DATA].sort((a,b)=>b.indice-a.indice).forEach(d=>{
+  const row=document.createElement("div");row.className="bar";
+  row.innerHTML=`<div class="nm">${d.nombre}</div>
+   <div class="track"><div class="fill" style="width:${d.indice}%;background:linear-gradient(90deg,${d.color}99,${d.color})"></div></div>
+   <div class="v">${d.indice}</div>`;
+  bars.appendChild(row);
+});
+
+/* ---------- FICHAS ---------- */
+const grid=document.getElementById("grid");
+const SUB=[["D","Demanda"],["G","Brecha"],["P","Prof."],["R","Ingresos"]];
+DATA.forEach(d=>{
+  const c=document.createElement("div");c.className="card";c.id="card-"+d.id;
+  c.style.borderTop="2px solid "+d.color;
+  const circ=2*Math.PI*22, off=circ*(1-d.indice/100);
+  const subbars=SUB.map(([k,lab])=>`<div class="sbcol"><div class="bw"><div class="b" style="height:${d[k]*10}%;background:${d.color}"></div></div><div class="lab">${k}</div></div>`).join("");
+  const kws=d.kw.map(k=>`<span>${k}</span>`).join("");
+  c.innerHTML=`
+    <div class="top">
+      <div><h3>${d.nombre}</h3><div class="cluster" style="color:${d.color}">${CLUSTERS[d.cluster].nombre}</div></div>
+      <div class="ring">
+        <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" fill="none" stroke="#1c2130" stroke-width="5"/>
+        <circle cx="27" cy="27" r="22" fill="none" stroke="${d.color}" stroke-width="5" stroke-linecap="round"
+          stroke-dasharray="${circ}" stroke-dashoffset="${off}" transform="rotate(-90 27 27)"/></svg>
+        <div class="rv" style="color:${d.color}">${d.indice}</div>
+      </div>
+    </div>
+    <div class="top-opp">Oportunidad nº1 · <b>${d.top}</b></div>
+    <div class="rowm"><span class="k">Demanda</span><span class="vv">${d.demanda}</span></div>
+    <div class="rowm"><span class="k">Competencia</span><span class="vv">${d.competencia}</span></div>
+    <div class="rowm"><span class="k">Ingresos est.</span><span class="vv">${d.ingresos}</span></div>
+    <div class="rowm"><span class="k">Tendencia</span><span class="vv">${d.tendencia}</span></div>
+    <div class="subbars">${subbars}</div>
+    <div class="kw">${kws}</div>`;
+  grid.appendChild(c);
+});
+function flash(id){const el=document.getElementById("card-"+id);el.animate([{boxShadow:"0 0 0 0 "+DATA.find(d=>d.id===id).color+"00"},{boxShadow:"0 0 0 3px "+DATA.find(d=>d.id===id).color+"66"},{boxShadow:"0 0 0 0 transparent"}],{duration:1200});}
+
+/* ---------- SANKEY / FLUJO ---------- */
+const TEMA=[
+ {id:"mujer",nombre:"Cuerpo & mujer",color:"#D6418E",hijos:["salud-mujer","apoyo-enfermedad"]},
+ {id:"sentido",nombre:"Sentido & vínculos",color:"#8C6BD8",hijos:["espiritualidad","relaciones"]},
+ {id:"mente_rend",nombre:"Mente & rendimiento",color:"#1FB89A",hijos:["inteligencia","rendimiento"]},
+ {id:"habitos",nombre:"Hábitos & adicción",color:"#EF7E3C",hijos:["adicciones","burnout"]},
+ {id:"mente",nombre:"Mente en crisis",color:"#2E7FD0",hijos:["salud-mental","ansiedad","estres-postraumatico","suenos"]}
+];
+const PERFIL=[
+ {id:"A",nombre:"Perfil A · No clínico / Divulgador",color:"#cdd6e8"},
+ {id:"B",nombre:"Perfil B · Médico / Científico",color:"#9fb4cc"},
+ {id:"C",nombre:"Perfil C · Psicólogo / Terapeuta",color:"#bda6dd"}
+];
+const WEIGHTS={
+ "salud-mujer":{A:.30,B:.50,C:.20},"apoyo-enfermedad":{A:.50,B:.10,C:.40},
+ "espiritualidad":{A:.60,B:.25,C:.15},"relaciones":{A:.40,B:.10,C:.50},
+ "inteligencia":{A:.60,B:.20,C:.20},"rendimiento":{A:.85,B:.15,C:0},
+ "adicciones":{A:.45,B:.30,C:.25},"burnout":{A:.60,B:.15,C:.25},
+ "salud-mental":{A:.70,B:.15,C:.15},"ansiedad":{A:.50,B:.20,C:.30},
+ "estres-postraumatico":{A:.30,B:.20,C:.50},"suenos":{A:.70,B:.30,C:0}
+};
+const flow=document.getElementById("flow");
+function buildFlow(){
+ flow.innerHTML="";
+ const PT=44, PB=44, GH=760-PT-PB;
+ const totalVal=DATA.reduce((s,d)=>s+d.indice,0);
+ // generous gaps
+ const k1=(GH-(TEMA.length-1)*16)/totalVal;       // col1
+ const k2=(GH-(DATA.length-1)*9)/totalVal;        // col2
+ const k3=(GH-(PERFIL.length-1)*40)/totalVal;     // col3
+ const c1x=160,c2x=600,c3x=1075,nw=15;
+ // --- column 2 (niches), grouped by tema order ---
+ const order=[];TEMA.forEach(t=>t.hijos.forEach(h=>order.push(h)));
+ let y=PT;const N2={};
+ order.forEach(id=>{const d=DATA.find(x=>x.id===id);const h=d.indice*k2;
+   N2[id]={x:c2x,y,h,d,inOff:0,outOff:0};y+=h+9;});
+ // --- column 1 (temáticas) ---
+ let y1=PT;const N1={};
+ TEMA.forEach(t=>{const val=t.hijos.reduce((s,h)=>s+DATA.find(x=>x.id===h).indice,0);
+   const h=val*k1;N1[t.id]={x:c1x,y:y1,h,t,off:0};y1+=h+16;});
+ // --- column 3 (perfiles) ---
+ const ptot={A:0,B:0,C:0};
+ DATA.forEach(d=>{const w=WEIGHTS[d.id];ptot.A+=d.indice*w.A;ptot.B+=d.indice*w.B;ptot.C+=d.indice*w.C;});
+ const c3sum=(ptot.A+ptot.B+ptot.C)*k3+(PERFIL.length-1)*40;
+ let y3=PT+(GH-c3sum)/2;const N3={};
+ PERFIL.forEach(p=>{const h=ptot[p.id]*k3;N3[p.id]={x:c3x,y:y3,h,p,off:0};y3+=h+40;});
+
+ function band(sx,sy,tx,ty,sh,th,color,op,cls,id){
+  const mx=(sx+tx)/2;
+  const d=`M ${sx} ${sy} C ${mx} ${sy}, ${mx} ${ty}, ${tx} ${ty} L ${tx} ${ty+th} C ${mx} ${ty+th}, ${mx} ${sy+sh}, ${sx} ${sy+sh} Z`;
+  const p=make("path",{d,fill:color,"fill-opacity":op,class:cls,"data-id":id});
+  flow.appendChild(p);return p;
+ }
+ // links col1 -> col2 (width = niche indice), colored by tema
+ TEMA.forEach(t=>{
+  const n1=N1[t.id];
+  t.hijos.forEach(hid=>{
+   const n2=N2[hid];const v=n2.d.indice;const sh=v*k1, th=v*k2;
+   band(n1.x+nw, n1.y+n1.off, n2.x, n2.y+n2.inOff, sh, th, t.color, .42, "ribbon r-"+hid, hid);
+   n1.off+=sh; n2.inOff+=th;
+  });
+ });
+ // links col2 -> col3 (width = indice*weight), colored by niche
+ order.forEach(hid=>{
+  const n2=N2[hid];const d=n2.d;const w=WEIGHTS[hid];
+  ["A","B","C"].forEach(pid=>{ if(!w[pid])return;
+   const v=d.indice*w[pid];const sh=v*k2, th=v*k3;
+   const n3=N3[pid];
+   band(n2.x+nw, n2.y+n2.outOff, n3.x, n3.y+n3.off, sh, th, d.color, .5, "ribbon r-"+hid, hid);
+   n2.outOff+=sh; n3.off+=th;
+  });
+ });
+ // column headers
+ [["TEMÁTICA EMERGENTE",c1x],["NICHO",c2x],["PERFIL DE AUTOR",c3x]].forEach(([t,x])=>{
+  const h=make("text",{x,y:24,class:"col-h"});h.textContent=t;flow.appendChild(h);});
+ // nodes col1
+ TEMA.forEach(t=>{const n=N1[t.id];const g=make("g",{class:"snode"});
+  g.appendChild(make("rect",{x:n.x,y:n.y,width:nw,height:Math.max(2,n.h),rx:3,fill:t.color}));
+  const tx=make("text",{x:n.x-8,y:n.y+n.h/2,"text-anchor":"end","dominant-baseline":"middle","font-size":13,"font-weight":600});
+  tx.textContent=t.nombre;g.appendChild(tx);flow.appendChild(g);});
+ // nodes col2
+ order.forEach(hid=>{const n=N2[hid];const d=n.d;const g=make("g",{class:"snode",style:"cursor:pointer"});
+  g.appendChild(make("rect",{x:n.x,y:n.y,width:nw,height:Math.max(2,n.h),rx:3,fill:d.color}));
+  const big=n.h>16;
+  const tx=make("text",{x:n.x+nw+8,y:n.y+n.h/2,"dominant-baseline":"middle","font-size":big?12.5:11,"font-weight":600});
+  tx.textContent=d.nombre;g.appendChild(tx);
+  const vl=make("text",{x:n.x-7,y:n.y+n.h/2,"text-anchor":"end","dominant-baseline":"middle",class:"svlabel","font-size":11});
+  vl.textContent=d.indice;g.appendChild(vl);
+  flow.appendChild(g);
+  g.addEventListener("mouseenter",()=>focusFlow(hid));
+  g.addEventListener("mouseleave",clearFlow);
+  g.addEventListener("click",()=>{document.getElementById("card-"+hid).scrollIntoView({behavior:"smooth",block:"center"});flash(hid);});
+ });
+ // nodes col3
+ PERFIL.forEach(p=>{const n=N3[p.id];const g=make("g",{class:"snode"});
+  g.appendChild(make("rect",{x:n.x,y:n.y,width:nw,height:Math.max(2,n.h),rx:3,fill:p.color}));
+  const tx=make("text",{x:n.x+nw+8,y:n.y+n.h/2,"dominant-baseline":"middle","font-size":12.5,"font-weight":600});
+  tx.textContent=p.nombre;g.appendChild(tx);flow.appendChild(g);});
+}
+function focusFlow(id){
+ const d=DATA.find(x=>x.id===id);
+ hintEl.textContent=d.nombre+" — "+d.top;hintEl.style.color=d.color;
+ flow.querySelectorAll(".ribbon").forEach(r=>r.style.opacity=r.dataset.id===id?1:.08);
+}
+function clearFlow(){hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";
+ flow.querySelectorAll(".ribbon").forEach(r=>r.style.opacity=1);}
+
+/* ---------- BURBUJAS (agrupadas por temática) ---------- */
+const bub=document.getElementById("bubbles");
+function buildBubbles(){
+ bub.innerHTML="";
+ const centers={mujer:[300,260],sentido:[645,230],mente_rend:[985,265],habitos:[420,545],mente:[860,540]};
+ const rB=v=>26+ (v-minI)/(maxI-minI)*44;
+ TEMA.forEach(t=>{
+  const [cxv,cyv]=centers[t.id];const kids=t.hijos.map(h=>DATA.find(d=>d.id===h));
+  // halo
+  const span=kids.length>2?150:120;
+  bub.appendChild(make("circle",{cx:cxv,cy:cyv,r:span,fill:t.color,"fill-opacity":.05,stroke:t.color,"stroke-opacity":.18,"stroke-dasharray":"3 5"}));
+  const hl=make("text",{x:cxv,y:cyv-span-12,"text-anchor":"middle",class:"col-h",fill:t.color});hl.textContent=t.nombre;bub.appendChild(hl);
+  // place kids around center
+  const n=kids.length;
+  kids.forEach((d,i)=>{
+   let px,py;
+   if(n===1){px=cxv;py=cyv;}
+   else if(n===2){px=cxv+(i===0?-58:58);py=cyv+(i===0?-12:18);}
+   else{const ang=(i/n)*2*Math.PI - Math.PI/2;px=cxv+Math.cos(ang)*62;py=cyv+Math.sin(ang)*62;}
+   const r=rB(d.indice);
+   const g=make("g",{class:"node-c",style:"cursor:pointer","data-id":d.id});
+   g.appendChild(make("circle",{cx:px,cy:py,r:r+4,fill:d.color,"fill-opacity":.14}));
+   g.appendChild(make("circle",{cx:px,cy:py,r,fill:d.color,"fill-opacity":.92,stroke:"#0a0c12","stroke-width":2}));
+   const v=make("text",{x:px,y:py-1,"text-anchor":"middle","font-size":Math.max(13,r*0.5),"font-weight":600,fill:"#0a0c12"});v.textContent=d.indice;g.appendChild(v);
+   const nm=make("text",{x:px,y:py+r*0.5+3,"text-anchor":"middle","font-size":9.5,fill:"#0a0c12","font-weight":500,opacity:.85});
+   nm.textContent=d.nombre.length>16?d.nombre.slice(0,15)+"…":d.nombre;g.appendChild(nm);
+   bub.appendChild(g);
+   g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+d.tendencia;hintEl.style.color=d.color;});
+   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";});
+   g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+  });
+ });
+}
+
+/* ---------- MATRIZ (treemap por temática) ---------- */
+const mtx=document.getElementById("matrix");
+function buildMatrix(){
+ mtx.innerHTML="";
+ const PAD=10, X0=40,Y0=58,Wm=1200,Hm=672;
+ const total=DATA.reduce((s,d)=>s+d.indice,0);
+ const h=make("text",{x:X0,y:34,class:"col-h"});h.textContent="MATRIZ DE OPORTUNIDAD · ÁREA ∝ ÍNDICE · COLOR POR TEMÁTICA";mtx.appendChild(h);
+ let x=X0;
+ TEMA.forEach(t=>{
+  const kids=t.hijos.map(h=>DATA.find(d=>d.id===h)).sort((a,b)=>b.indice-a.indice);
+  const cval=kids.reduce((s,d)=>s+d.indice,0);
+  const colW=(cval/total)*Wm;
+  let yy=Y0;
+  kids.forEach(d=>{
+   const rh=(d.indice/cval)*Hm;
+   const g=make("g",{class:"node-c",style:"cursor:pointer","data-id":d.id});
+   g.appendChild(make("rect",{x:x+2,y:yy+2,width:colW-4,height:rh-4,rx:6,fill:d.color,"fill-opacity":.9}));
+   const big=rh>54&&colW>90;
+   const nm=make("text",{x:x+14,y:yy+22,"font-size":big?14:11.5,"font-weight":600,fill:"#0a0c12"});
+   nm.textContent=d.nombre;g.appendChild(nm);
+   if(big){
+    const vl=make("text",{x:x+14,y:yy+rh-30,"font-size":30,"font-weight":700,fill:"#0a0c12","fill-opacity":.55});vl.textContent=d.indice;g.appendChild(vl);
+    const op=make("text",{x:x+14,y:yy+rh-13,"font-size":10.5,fill:"#0a0c12","fill-opacity":.7});op.textContent=d.oportunidades+" oportunidades · "+d.competencia;g.appendChild(op);
+   } else {
+    const vl=make("text",{x:x+colW-14,y:yy+22,"text-anchor":"end","font-size":13,"font-weight":700,fill:"#0a0c12","fill-opacity":.6});vl.textContent=d.indice;g.appendChild(vl);
+   }
+   mtx.appendChild(g);
+   g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+t.nombre;hintEl.style.color=d.color;});
+   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";});
+   g.addEventListener("click",()=>{document.getElementById("card-"+d.id).scrollIntoView({behavior:"smooth",block:"center"});flash(d.id);});
+   yy+=rh;
+  });
+  // tema label
+  const tl=make("text",{x:x+colW/2,y:Y0-8,"text-anchor":"middle",class:"col-h",fill:t.color,"font-size":10});
+  tl.textContent=t.nombre.toUpperCase();mtx.appendChild(tl);
+  x+=colW;
+ });
+}
+
+/* ---------- SELECTOR DE SKINS ---------- */
+const SVGS={fan:"fan",flow:"flow",bubbles:"bubbles",matrix:"matrix"};
+const META={
+ fan:["Abanico de oportunidad","/ índice 0–100 · color por temática","Pasa el cursor sobre cada rama para aislarla. El número dentro del nodo es su índice de oportunidad."],
+ flow:["Flujo de oportunidad","/ temática → nicho → perfil de autor","El grosor de cada cinta es proporcional al índice de oportunidad. Sigue cómo fluye de cada temática emergente al nicho y al perfil de autor que mejor lo captura."],
+ bubbles:["Burbujas por temática","/ tamaño ∝ índice · agrupado por temática","Cada burbuja es un nicho; su tamaño refleja el índice de oportunidad. Las burbujas se agrupan en sus cinco temáticas emergentes."],
+ matrix:["Matriz de oportunidad","/ treemap · área ∝ índice","Cada rectángulo es un nicho; su superficie es proporcional al índice de oportunidad, agrupado en columnas por temática."]
+};
+const builders={flow:buildFlow,bubbles:buildBubbles,matrix:buildMatrix};
+const builtSet=new Set();
+document.querySelectorAll(".mode-btn").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".mode-btn").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active");
+ const m=b.dataset.mode;
+ Object.values(SVGS).forEach(id=>document.getElementById(id).style.display="none");
+ if(builders[m] && !builtSet.has(m)){builders[m]();builtSet.add(m);}
+ document.getElementById(SVGS[m]).style.display="block";
+ document.getElementById("vizTitle").textContent=META[m][0];
+ document.getElementById("vizTag").textContent=META[m][1];
+ document.getElementById("vizDesc").textContent=META[m][2];
+ hintEl.textContent="Mercado editorial KDP — 12 nichos activos";hintEl.style.color="";
+ clearFocus();
+}));
+</script>
+</body>
+</html>
