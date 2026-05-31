@@ -17,6 +17,12 @@
   --c-intel:#1FB89A; --c-rend:#54C79E;
   --c-adic:#EF7E3C; --c-burn:#F2A93E;
   --c-smental:#2E7FD0; --c-ansi:#3F97DE; --c-trauma:#5FBCEA; --c-suenos:#86D3EC;
+  --hub-bg:#0c0e15; --fan1:#10141f; --fan2:#0e1119; --fan3:#090b11; --sheet1:#12151f; --sheet2:#0d101a;
+}
+body.light{
+  --bg:#f5f7fb; --bg2:#ffffff; --panel:#ffffff; --panel2:#eef1f6;
+  --line:#e3e7f0; --txt:#16202f; --txt2:#56617a; --txt3:#8b93a6;
+  --hub-bg:#eef1f6; --fan1:#ffffff; --fan2:#f5f7fb; --fan3:#eef1f6; --sheet1:#ffffff; --sheet2:#f5f7fb;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -32,6 +38,10 @@ h1{font-size:clamp(30px,5vw,52px);font-weight:600;letter-spacing:-.02em;line-hei
 h1 .grad{background:linear-gradient(95deg,#D6418E,#8C6BD8 35%,#2E7FD0 60%,#1FB89A);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .sub{color:var(--txt2);font-size:16px;max-width:680px;margin-top:16px;font-weight:300}
+.theme-toggle{position:absolute;top:54px;right:0;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--txt2);background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:9px;cursor:pointer;z-index:10}
+.theme-toggle:hover{color:var(--txt)}
+body{transition:background .25s,color .25s}
 
 /* KPI STRIP */
 .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
@@ -51,7 +61,7 @@ h1 .grad{background:linear-gradient(95deg,#D6418E,#8C6BD8 35%,#2E7FD0 60%,#1FB89
 
 /* FAN CHART */
 .fanbox{position:relative;border:1px solid var(--line);border-radius:18px;
-  background:radial-gradient(120% 120% at 18% 50%,#10141f 0%,var(--bg2) 55%,#090b11 100%);
+  background:radial-gradient(120% 120% at 18% 50%,var(--fan1) 0%,var(--fan2) 55%,var(--fan3) 100%);
   overflow:hidden;margin-top:18px}
 svg{display:block;width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:16px 22px 20px;border-top:1px solid var(--line)}
@@ -78,7 +88,7 @@ svg{display:block;width:100%;height:auto}
 .node-val{font-family:'JetBrains Mono',monospace;font-weight:500}
 .node-sub{font-family:'JetBrains Mono',monospace;fill:var(--txt3);font-size:11px}
 .dim{opacity:.16}
-.hub circle{fill:#0c0e15;stroke:#2a3142;stroke-width:1.5}
+.hub circle{fill:var(--hub-bg);stroke:#2a3142;stroke-width:1.5}
 .hub text{fill:var(--txt);text-anchor:middle;font-family:'Space Grotesk'}
 
 /* RANK BARS */
@@ -129,7 +139,7 @@ svg{display:block;width:100%;height:auto}
 .overlay{position:fixed;inset:0;background:rgba(5,6,10,.72);backdrop-filter:blur(6px);
   display:none;align-items:flex-start;justify-content:center;z-index:50;padding:40px 18px;overflow-y:auto}
 .overlay.open{display:flex}
-.sheet{width:100%;max-width:860px;background:linear-gradient(180deg,#12151f,#0d101a);
+.sheet{width:100%;max-width:860px;background:linear-gradient(180deg,var(--sheet1),var(--sheet2));
   border:1px solid var(--line);border-radius:20px;padding:0;overflow:hidden;
   box-shadow:0 30px 80px rgba(0,0,0,.6);animation:rise .3s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}}
@@ -178,15 +188,16 @@ footer b{color:var(--txt2);font-weight:500}
 <body>
 <div class="wrap">
   <header>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">☀ Claro</button>
     <div class="eyebrow">Investigación editorial · Amazon KDP · Helium 10 · Mayo 2026</div>
     <h1>Mapa de oportunidad del<br><span class="grad">mercado editorial</span></h1>
-    <p class="sub">Trece nichos, agrupados por temática emergente. El tamaño de cada nodo refleja su <b style="color:var(--txt);font-weight:500">índice de oportunidad</b>: cuanto mayor el círculo, mayor la combinación de demanda, brecha de mercado, profundidad de subnichos y potencial de ingresos.</p>
+    <p class="sub">Diecisiete nichos, agrupados por temática emergente. El tamaño de cada nodo refleja su <b style="color:var(--txt);font-weight:500">índice de oportunidad</b>: cuanto mayor el círculo, mayor la combinación de demanda, brecha de mercado, profundidad de subnichos y potencial de ingresos.</p>
     <div class="kpis">
-      <div class="kpi"><div class="n">13</div><div class="l">Nichos analizados</div></div>
-      <div class="kpi"><div class="n">225+</div><div class="l">Oportunidades</div></div>
+      <div class="kpi"><div class="n">17</div><div class="l">Nichos analizados</div></div>
+      <div class="kpi"><div class="n">300+</div><div class="l">Oportunidades</div></div>
       <div class="kpi"><div class="n">11</div><div class="l">Marketplaces</div></div>
-      <div class="kpi"><div class="n">&gt;800k</div><div class="l">Búsq/mes (ES)</div></div>
-      <div class="kpi"><div class="n">5</div><div class="l">Temáticas</div></div>
+      <div class="kpi"><div class="n">&gt;1,2M</div><div class="l">Búsq/mes (ES)</div></div>
+      <div class="kpi"><div class="n">6</div><div class="l">Temáticas</div></div>
     </div>
   </header>
 
@@ -200,8 +211,8 @@ footer b{color:var(--txt2);font-weight:500}
       <button class="mode-btn" data-mode="matrix">▦ Matriz</button>
     </div>
     <div class="fanbox">
-      <div class="hint" id="hint">Mercado editorial KDP — 13 nichos activos</div>
-      <svg id="fan" viewBox="0 0 1180 640" aria-label="Abanico de oportunidad"></svg>
+      <div class="hint" id="hint">Mercado editorial KDP — 17 nichos activos</div>
+      <svg id="fan" viewBox="0 0 1180 760" aria-label="Abanico de oportunidad"></svg>
       <svg id="flow" viewBox="0 0 1280 760" aria-label="Flujo Sankey" style="display:none"></svg>
       <svg id="bubbles" viewBox="0 0 1280 760" aria-label="Burbujas" style="display:none"></svg>
       <svg id="matrix" viewBox="0 0 1280 760" aria-label="Matriz" style="display:none"></svg>
@@ -241,23 +252,32 @@ const CLUSTERS={
   sentido:{nombre:"Sentido & vínculos"},
   mente_rend:{nombre:"Mente & rendimiento"},
   habitos:{nombre:"Hábitos & adicción"},
-  mente:{nombre:"Mente en crisis"}
+  mente:{nombre:"Mente en crisis"},
+  longevidad:{nombre:"Cuerpo & longevidad"}
 };
 const DATA=[
  {id:"salud-mujer",nombre:"Salud de la Mujer",cluster:"mujer",color:"#D6418E",indice:90,D:10,G:8,P:10,R:8,
   ingresos:"€15.000–22.000 /título·mes",demanda:"menopausia 25–35k · endometriosis 15–22k · dependencia emocional 18–28k",competencia:"Baja–Media",tendencia:"Cycle syncing · niebla mental perimenopáusica",oportunidades:25,top:"Brain fog perimenopáusico (Perfil B)",kw:["niebla mental menopausia","SOP libro","PAS mujer","cycle syncing"]},
  {id:"apoyo-enfermedad",nombre:"Apoyo en la Enfermedad",cluster:"mujer",color:"#E873A8",indice:77,D:7,G:10,P:8,R:5,
   ingresos:"$2.400–4.000 /mes",demanda:"fibromialgia 2.400 · duelo 1.800 · cuidador 1.200",competencia:"Muy baja (brecha 37×)",tendencia:"El cuidador invisible · duelo honesto",oportunidades:25,top:"El Manual del Cuidador (Perfil A)",kw:["cuidador familiar libro","fibromialgia libro","duelo sin fases","vida después del cáncer"]},
+ {id:"prevencion",nombre:"Prevención",cluster:"longevidad",color:"#C0CA33",indice:90,D:8,G:10,P:9,R:9,
+  ingresos:"$12.000–30.000 /mes",demanda:"prevención 18.061 · cardiovascular 18.083 · 'el código de la diabetes' 5.308 (+54%)",competencia:"Nula en español · gap histórico",tendencia:"Outlive en español · entender tus analíticas",oportunidades:25,top:"Vivir Más, Enfermar Menos — el Outlive hispano (Médico)",kw:["el código de la diabetes","prevenir alzheimer libro","analíticas sangre libro","sin limites peter attia"]},
+ {id:"longevidad",nombre:"Longevidad",cluster:"longevidad",color:"#9CCC4E",indice:85,D:8,G:9,P:9,R:8,
+  ingresos:"$8.000–15.000 /mes",demanda:"longevidad ES 30.328 · longevity COM 3,99M · ayuno MX 25.597",competencia:"Baja · sin autor hispano de referencia",tendencia:"Zonas azules a la española · caminar para vivir más",oportunidades:25,top:"Zonas Azules a la Española (Perfil A/C)",kw:["longevidad libro","activa tus mitocondrias","ayuno intermitente","outlive peter attia"]},
  {id:"espiritualidad",nombre:"Espiritualidad",cluster:"sentido",color:"#8C6BD8",indice:87,D:10,G:9,P:8,R:7,
   ingresos:"$4.800–5.250 /mes",demanda:"Categoría ES 502.911 búsq/mes · 'morir para ser yo' 50.000",competencia:"Casi nula (CI=3)",tendencia:"Espiritualidad para escépticos · mindfulness masculino",oportunidades:25,top:"Espiritualidad para Escépticos (Perfil A)",kw:["espiritualidad sin religión","meditación para hombres","ECM español","budismo secular"]},
  {id:"relaciones",nombre:"Relaciones",cluster:"sentido",color:"#A982E0",indice:84,D:8,G:8,P:9,R:9,
   ingresos:"$15.000–30.000 /mes",demanda:"Muy alta en pareja, apego y vínculos",competencia:"Baja",tendencia:"Apego · narcisismo · coaching relacional",oportunidades:25,top:"Apego y vínculos sanos (Coach relacional)",kw:["apego libro","relaciones de pareja","narcisismo","dependencia emocional"]},
+ {id:"educacion-infantil",nombre:"Educación Infantil",cluster:"sentido",color:"#B58BE0",indice:86,D:10,G:8,P:9,R:7,
+  ingresos:"$5.000–9.000 /mes",demanda:"TDAH niños 324.081/mes · crianza consciente 64.655",competencia:"Baja–Media · Bilbao domina neurociencia",tendencia:"Pantallas y familia · TDAH post-diagnóstico",oportunidades:25,top:"TDAH Niños: guía de acción inmediata (Perfil A/C)",kw:["tdah niños libro","crianza consciente","disciplina positiva","pantallas niños libro"]},
  {id:"inteligencia",nombre:"Inteligencia",cluster:"mente_rend",color:"#1FB89A",indice:85,D:9,G:8,P:9,R:8,
   ingresos:"$8.400–12.000 /mes",demanda:"Cluster IE 91.821/mes ES · 2,99M COM",competencia:"Muy baja",tendencia:"IE masculina · IA e inteligencia humana",oportunidades:25,top:"IE para Hombres, sin eufemismos (Perfil A)",kw:["inteligencia emocional hombres","pensamiento crítico fake news","ia inteligencia humana","leer a las personas"]},
  {id:"rendimiento",nombre:"Rendimiento Empresarial",cluster:"mente_rend",color:"#54C79E",indice:78,D:7,G:7,P:8,R:10,
   ingresos:"$30.000–60.000 /mes",demanda:"Alta — segmento B2B premium",competencia:"Baja–Media",tendencia:"OKRs para pymes en español · EOS",oportunidades:25,top:"OKRs para pymes en español (Consultor)",kw:["okr libro español","cultura empresa libro","escalar negocio","liderazgo equipos"]},
  {id:"neurowellness",nombre:"Neurowellness y Performance",cluster:"mente_rend",color:"#2FD0B8",indice:85,D:7,G:10,P:9,R:8,
   ingresos:"$12.250–15.200 /mes",demanda:"nervio vago 906 · TDAH adultos 869 · grupo polivagal 465.842 (COM)",competencia:"Casi nula · gaps absolutos",tendencia:"Neurorregulación · nervio vago · TDAH adultos",oportunidades:25,top:"Neurorregulación: activa tu sistema nervioso (gap máximo)",kw:["neurorregulación (NOT FOUND)","nervio vago","TDAH adultos","teoría polivagal"]},
+ {id:"creatividad",nombre:"Creatividad",cluster:"mente_rend",color:"#3CCB8C",indice:78,D:6,G:10,P:9,R:6,
+  ingresos:"$1.500–7.500 /mes",demanda:"mercado ES 75.078€/mes · creativity COM 442 · escritura terapéutica 95",competencia:"Casi nula · mercados vacíos (SV=0)",tendencia:"Estado de flujo · creatividad con IA · escritura terapéutica",oportunidades:25,top:"Estado de Flujo: la ciencia de la creatividad plena (Perfil B)",kw:["estado de flujo libro","bloqueo creativo","escritura terapéutica","creatividad con IA"]},
  {id:"adicciones",nombre:"Adicciones",cluster:"habitos",color:"#EF7E3C",indice:80,D:7,G:9,P:9,R:7,
   ingresos:"$19.200–28.800 /mes",demanda:"dejar de beber 4.200 · sober curious 1.200 (+120%)",competencia:"Muy baja",tendencia:"Sober curious en español · dopamina digital",oportunidades:25,top:"Sober Curious en español (Perfil A)",kw:["sober curious libro","adicción pornografía","dopamine detox español","recuperación sin 12 pasos"]},
  {id:"burnout",nombre:"Burnout",cluster:"habitos",color:"#F2A93E",indice:76,D:6,G:10,P:8,R:6,
@@ -312,7 +332,19 @@ const DETAIL={
   k:[["interpretación sueños libro","520","—"],["sueños lúcidos","↑↑ creciente","—"],["significado de los sueños","alta","—"],["sueños infantiles significado","220 (+28%)","—"],["diccionario de los sueños","520","—"]]},
  "neurowellness":{cpc:"€0,40–0,90 (ES) · gaps sin CPC",busq:"nervio vago 906 · TDAH 869 · grupo 186.689 (ES)",ing:"$12.250–15.200 /mes",
   o:["Neurorregulación: activa tu sistema nervioso (gap máximo)","Nervio vago para principiantes: 7 minutos al día","Teoría polivagal aplicada a la vida cotidiana","Neuroplasticidad aplicada: recablea tu cerebro","TDAH adultos: manual definitivo sin medicación","Dopamina al día: recalibra tu recompensa en 30 días","Reset nervioso: 5 minutos para salir del modo supervivencia","Rendimiento cognitivo total: el sistema para pensar mejor","Atención y foco: anti-distracción para el cerebro moderno","Neurodiversidad: el superpoder que nadie te explicó"],
-  k:[["nervio vago","906","0,85€"],["TDAH adultos","869","0,90€"],["regulación emocional","380","0,70€"],["dopamina libro","268","0,75€"],["salud cerebral","210","0,65€"],["teoría polivagal","151","0,60€"],["neurorregulación","NOT FOUND ↑↑↑","—"],["neuroplasticidad","0 (grupo 12.253)","0,40€"]]}
+  k:[["nervio vago","906","0,85€"],["TDAH adultos","869","0,90€"],["regulación emocional","380","0,70€"],["dopamina libro","268","0,75€"],["salud cerebral","210","0,65€"],["teoría polivagal","151","0,60€"],["neurorregulación","NOT FOUND ↑↑↑","—"],["neuroplasticidad","0 (grupo 12.253)","0,40€"]]},
+ "prevencion":{cpc:"€0,30–0,80 · $0,50–1,10 (COM)",busq:"18.061 + 18.083/mes ES · 1,35M COM · 'sin limites attia' 56.667",ing:"$12.000–30.000 /mes",
+  o:["Vivir Más, Enfermar Menos (el Outlive hispano)","Entiende tus Analíticas","Cero Diabetes: prevención y reversión","Protege tu Cerebro (Alzheimer)","Corazón Blindado (cardiovascular)","Anticáncer 2025","Prediabetes: el diagnóstico ignorado","Inmunidad Inteligente","Hipertensión sin Medicación (todavía)","Vacunas para Adultos"],
+  k:[["el código de la diabetes","5.308 (+54%)","0,50–0,80€"],["libro comer para sanar","5.256 (+73%)","—"],["lisa mosconi menopausia y cerebro","5.143","—"],["dr william li","3.040","0,30–0,50€"],["prevención cardiovascular (cluster)","18.083","0,40–0,65€"],["analíticas sangre libro","alta intención","0,30–0,50€"],["sin limites peter attia (COM)","56.667","—"]]},
+ "longevidad":{cpc:"$0,52–0,90 (COM) · ES n/d",busq:"30.328/mes ES · 3,99M COM · ayuno MX 25.597",ing:"$8.000–15.000 /mes",
+  o:["Zonas Azules a la Española","El Protocolo Attia en español","Ayuno intermitente en la menopausia","Activa tu Longevidad (mitocondrias)","Longevidad para mayores de 65","La Dieta de la Longevidad — ed. española","El Reloj Biológico (epigenética)","Caminar para Vivir Más","Biohacking para Todos (sin gadgets)","NAD+ y la Juventud Celular"],
+  k:[["antonio valenzuela","18.489 (+53%)","—"],["activa tus mitocondrias","9.000","—"],["alarga tu esperanza de vida","9.000","—"],["outlive peter attia","4.938 (+77%)","—"],["ikigai libro","4.500","—"],["longevity book (COM)","42.071 (+181%)","0,72$"],["walk book (COM)","42.071 (+181%)","0,65$"]]},
+ "educacion-infantil":{cpc:"€ n/d · precio libro 16,99–19,99€",busq:"TDAH niños 324.081/mes · crianza consciente 64.655",ing:"$5.000–9.000 /mes (disciplina positiva >5.000€ con <75 reseñas)",
+  o:["TDAH Niños: guía de acción inmediata","Pantallas Conscientes para Familias","Neurociencia Infantil 0-6 (Perfil B)","Disciplina Positiva Psicológica","Crianza con Límites","Cerebro Adolescente para Padres","TDAH en Niñas: diagnóstico tardío","Altas Capacidades y Emociones","Montessori en 5 Minutos","Neurodivergente en Familia (TDAH+TEA+AACC)"],
+  k:[["tdah niños (cluster)","324.081","—"],["crianza consciente (cluster)","64.655","—"],["rafa guerrero","4.385 (+228%)","—"],["tdah niños libro","768","—"],["el cerebro del niño explicado","453 (+98%)","—"],["trastorno negativista desafiante","471 (+112%)","—"],["pantallas niños libro","gap total","—"]]},
+ "creatividad":{cpc:"$0,53–1,65 (COM) · ES n/d (SV=0)",busq:"ES 75.078€/mes (revenue) · creativity COM 442 · escritura terapéutica 95",ing:"$1.500–7.500 /mes",
+  o:["Estado de Flujo: la ciencia de la creatividad plena","Bloqueo Creativo: método de liberación (secular)","Neurociencia de la Creatividad","Creatividad con IA: usar la IA sin perder tu voz","Escritura Terapéutica: sana y crea con palabras","El Arte del Storytelling (workbook)","Crea tu Libro con IA (idea → KDP)","Diario del Artista: 365 ejercicios","Flow para Músicos","Psicología Positiva para Artistas"],
+  k:[["the creative act (COM)","3.335","0,80$"],["rick rubin (COM)","1.870","0,53$"],["creativity (COM)","977","0,61$"],["creativity book (COM)","442","0,73$"],["escritura terapéutica","95 (único SV>0 ES)","—"],["estado de flujo libro","SV=0 · 10 result.","—"],["bloqueo creativo","SV=0 · 6 result.","—"]]}
 };
 const REVIEWS={
  "salud-mujer":{v:"Lenguaje accesible y la sensación de «por fin entiendo mi cuerpo» (Feliz menopausia, Sandra Moñino).",c:"Demasiada teoría con pocas herramientas; no cubren los síntomas cognitivos ni emocionales; falta un plan por semanas.",
@@ -407,19 +439,47 @@ const REVIEWS={
      "Driven to Distraction / ADHD 2.0 (Hallowell & Ratey): valoran que validan la experiencia del TDAH adulto; critican que están desactualizados y son «muy clínicos, con pocas herramientas». Necesidad: TDAH adultos con tono positivo y herramientas digitales.",
      "Scattered Minds (Gabor Maté, 8.900 reseñas): valoran que es compasivo y revelador; critican que «no da herramientas prácticas, es muy teórico». Necesidad: manual práctico con sus ideas + ejercicios reales.",
      "Dopamine Nation (Anna Lembke, 18.000 reseñas): valoran que es revelador; critican que se enfoca en la adicción y no en la optimización. Necesidad: dopamina para rendir mejor, no solo para adictos."],
-  o:"Neurorregulación accesible para no clínicos — «neurorregulación» ni siquiera aparece en Helium 10 (gap absoluto)."}
+  o:"Neurorregulación accesible para no clínicos — «neurorregulación» ni siquiera aparece en Helium 10 (gap absoluto)."},
+ "prevencion":{v:"Demanda confirmada por enfermedad concreta; el lector quiere entender el mecanismo, no solo recetas.",c:"Traducciones sin adaptar al sistema sanitario ni a la gastronomía hispana; tono reactivo, no preventivo.",
+  p:["«El médico no me explica qué hacer con mis resultados»: 400M de consultas/año en España con 7 minutos por consulta. Nadie explica el LDL, la PCR ultrasensible o la vitamina D. Gap: «Entiende tus Analíticas».",
+     "«Mi padre/madre tuvo X — ¿qué hago yo para no tenerlo?»: el miedo familiar es el mayor motor de compra; «prevenir alzheimer/diabetes/infarto» suman 4.000–18.000 búsquedas/mes sin libro de médico hispano.",
+     "«Muy radical / no puedo llevar esa dieta en mi vida real»: los libros se perciben como demasiado restrictivos. El lector quiere el mecanismo adaptado a la dieta mediterránea/latina, no el modelo vegano radical.",
+     "«No hay nada en español adaptado a nuestra comida y sistema sanitario»: «sin limites peter attia» tiene 56.667 búsquedas en Amazon.com desde hispanohablantes. Ningún libro menciona el SNS, el IMSS o la Seguridad Social.",
+     "«El médico convencional no hace nada hasta que la enfermedad aparece»: las tendencias +54%/+73% reflejan pacientes que quieren actuar antes de enfermar y solo encuentran libros de tratamiento, no de prevención primaria."],
+  o:"«Vivir Más, Enfermar Menos»: el Outlive en español adaptado al sistema sanitario hispano. El gap editorial más grande del nicho."},
+ "longevidad":{v:"Profundidad científica, protocolo y honestidad médica (Outlive de Attia, 4.200+ reseñas).",c:"Demasiado largo y técnico para no médicos; suplementos caros; sin protocolo realmente aplicable.",
+  p:["«Muy técnico / quiero saber qué hacer»: Outlive es brillante pero largo; las reseñas de 3★ piden un plan de 30/60/90 días. Gap: la guía práctica derivada.",
+     "«No hay nada así en español / la traducción tarda años»: Outlive tardó más de un año; Lifespan sin traducción amplia. «david sinclair» en ES (1.314, +23%) sin libro = demanda insatisfecha.",
+     "«¿Funciona para mujeres / para la menopausia?»: el mercado está dominado por perspectivas masculinas; más de 15.000 búsquedas/mes de longevidad femenina sin libro en español.",
+     "«Demasiado caro / sin gadgets de lujo»: Asprey y Ferriss asumen crioterapia y suplementos de 300€/mes. Gap: biohacking asequible con lo que hay en España y LATAM.",
+     "«¿Qué hago yo con 60/70 años para empezar?»: los libros asumen un lector joven y activo. Necesidad de guías para quien empieza a los 60-70 con condiciones limitadas."],
+  o:"«Zonas Azules a la Española»: el primer best-seller nativo de longevidad mediterránea, con protocolo de 12 semanas."},
+ "educacion-infantil":{v:"Lenguaje accesible sin renunciar al rigor y estructura por situaciones cotidianas (Álvaro Bilbao, 8.000 reseñas).",c:"Falta un libro práctico post-diagnóstico de TDAH de autor no clínico; las pantallas no tienen ni categoría editorial.",
+  p:["TDAH post-diagnóstico: 1.212 keywords y 324.081 búsquedas/mes en «tdah niños», pero no existe libro de NO clínico en español que diga «qué hago mañana» desde la experiencia familiar.",
+     "Pantallas (gap de categoría total): «pantallas niños libro» devuelve la categoría «Humor» en Amazon (no existe categoría propia), 16 resultados sin libro dominante. Falta el Jonathan Haidt práctico en español.",
+     "Disciplina positiva: revenue >5.000€ con <75 reseñas (Xray) = mercado sin saturar y con dinero. Falta el psicólogo que le dé base científica (apego, regulación, límites).",
+     "Neurociencia infantil 0-6: «El cerebro del niño explicado» (Bilbao) lidera con 8.000 reseñas, pero no hay equivalente específico para la etapa bebé de autor médico.",
+     "TDAH en niñas: se diagnostica 5-7 años más tarde; comunidad creciente en Instagram sin libro específico de médico que aborde el diagnóstico tardío."],
+  o:"«TDAH Niños: de la desesperación al plan de acción», estructurado por las rutinas del día, desde la experiencia familiar."},
+ "creatividad":{v:"Ejercicios semanales, estructura de 12 semanas y transformación creativa real (El Camino del Artista, 2.884 reseñas).",c:"Contenido religioso/espiritual invasivo y poco práctico; los clásicos (Csikszentmihalyi) son demasiado académicos.",
+  p:["«Esperaba algo práctico, no religioso»: El Camino del Artista (Julia Cameron), líder en ES, acumula reseñas de 1★ por el contenido espiritual. Cita real: «Si quiero oír hablar de Dios voy a misa». Gap: el método secular con tareas concretas.",
+     "Estado de flujo (mercado vacío): 10 de 10 libros de «estado de flujo libro» tienen menos de 75 reseñas y un BSR medio de 437.330. Gap total confirmado en español.",
+     "«Demasiado académico / falta el workbook»: Csikszentmihalyi define el estándar teórico del flujo, pero falta la versión práctica con ejercicios para el creativo común.",
+     "«Muy filosófico / poco accionable»: The Creative Act (Rick Rubin) inspira pero pide ejercicios concretos derivados de su enfoque.",
+     "Creatividad con IA: 162 resultados en Amazon.es, casi todos manuales técnicos de prompts; el ángulo emocional/artístico («usar la IA sin perder tu voz») está sin cubrir."],
+  o:"El método de desbloqueo creativo SECULAR que El Camino del Artista no es, con ejercicios y base científica del flujo."}
 };
 
 /* ---------- FAN CHART ---------- */
 const NS="http://www.w3.org/2000/svg";
 const svg=document.getElementById("fan");
-const W=1180,H=640, cx=140, cy=H/2;
+const W=1180,H=760, cx=140, cy=H/2;
 const idx=DATA.map(d=>d.indice);
 const minI=Math.min(...idx),maxI=Math.max(...idx);
-const rScale=v=>9+ (v-minI)/(maxI-minI)*13;           // node radius 9..22
-const fScale=v=>11+ (v-minI)/(maxI-minI)*6;            // label font 11..17
+const rScale=v=>8+ (v-minI)/(maxI-minI)*11;           // node radius 8..19
+const fScale=v=>11+ (v-minI)/(maxI-minI)*5;            // label font 11..16
 const N=DATA.length;
-const nodeX=520, topM=42, usableH=H-2*topM;
+const nodeX=520, topM=40, usableH=H-2*topM;
 
 function make(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
 
@@ -440,7 +500,7 @@ layout.forEach(d=>{
 const hub=make("g",{class:"hub"});
 hub.appendChild(make("circle",{cx,cy,r:46}));
 const ht1=make("text",{x:cx,y:cy-5,"font-size":10,"font-family":"JetBrains Mono",fill:"#9aa3b8"});ht1.textContent="MERCADO";
-const ht2=make("text",{x:cx,y:cy+12,"font-size":12,"font-weight":600});ht2.textContent="KDP · 13";
+const ht2=make("text",{x:cx,y:cy+12,"font-size":12,"font-weight":600});ht2.textContent="KDP · 17";
 hub.appendChild(ht1);hub.appendChild(ht2);
 svg.appendChild(hub);
 
@@ -474,7 +534,7 @@ function focus(id){
   svg.querySelectorAll(".node-c").forEach(n=>n.classList.toggle("dim",n.dataset.id!==id));
 }
 function clearFocus(){
-  hintEl.textContent="Mercado editorial KDP — 13 nichos activos";hintEl.style.color="";
+  hintEl.textContent="Mercado editorial KDP — 17 nichos activos";hintEl.style.color="";
   svg.querySelectorAll(".edge").forEach(e=>{e.style.opacity=1;e.setAttribute("stroke-opacity",.55);});
   svg.querySelectorAll(".node-c").forEach(n=>n.classList.remove("dim"));
 }
@@ -594,8 +654,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();});
 /* ---------- SANKEY / FLUJO ---------- */
 const TEMA=[
  {id:"mujer",nombre:"Cuerpo & mujer",color:"#D6418E",hijos:["salud-mujer","apoyo-enfermedad"]},
- {id:"sentido",nombre:"Sentido & vínculos",color:"#8C6BD8",hijos:["espiritualidad","relaciones"]},
- {id:"mente_rend",nombre:"Mente & rendimiento",color:"#1FB89A",hijos:["inteligencia","rendimiento","neurowellness"]},
+ {id:"sentido",nombre:"Sentido & vínculos",color:"#8C6BD8",hijos:["espiritualidad","relaciones","educacion-infantil"]},
+ {id:"mente_rend",nombre:"Mente & rendimiento",color:"#1FB89A",hijos:["inteligencia","rendimiento","neurowellness","creatividad"]},
+ {id:"longevidad",nombre:"Cuerpo & longevidad",color:"#9CCC4E",hijos:["prevencion","longevidad"]},
  {id:"habitos",nombre:"Hábitos & adicción",color:"#EF7E3C",hijos:["adicciones","burnout"]},
  {id:"mente",nombre:"Mente en crisis",color:"#2E7FD0",hijos:["salud-mental","ansiedad","estres-postraumatico","suenos"]}
 ];
@@ -611,7 +672,8 @@ const WEIGHTS={
  "adicciones":{A:.45,B:.30,C:.25},"burnout":{A:.60,B:.15,C:.25},
  "salud-mental":{A:.70,B:.15,C:.15},"ansiedad":{A:.50,B:.20,C:.30},
  "estres-postraumatico":{A:.30,B:.20,C:.50},"suenos":{A:.70,B:.30,C:0},
- "neurowellness":{A:.45,B:.30,C:.25}
+ "neurowellness":{A:.45,B:.30,C:.25},"prevencion":{A:.20,B:.65,C:.15},"longevidad":{A:.40,B:.45,C:.15},
+ "educacion-infantil":{A:.30,B:.25,C:.45},"creatividad":{A:.45,B:.25,C:.30}
 };
 const flow=document.getElementById("flow");
 function buildFlow(){
@@ -696,14 +758,14 @@ function focusFlow(id){
  hintEl.textContent=d.nombre+" — "+d.top;hintEl.style.color=d.color;
  flow.querySelectorAll(".ribbon").forEach(r=>r.style.opacity=r.dataset.id===id?1:.08);
 }
-function clearFlow(){hintEl.textContent="Mercado editorial KDP — 13 nichos activos";hintEl.style.color="";
+function clearFlow(){hintEl.textContent="Mercado editorial KDP — 17 nichos activos";hintEl.style.color="";
  flow.querySelectorAll(".ribbon").forEach(r=>r.style.opacity=1);}
 
 /* ---------- BURBUJAS (agrupadas por temática) ---------- */
 const bub=document.getElementById("bubbles");
 function buildBubbles(){
  bub.innerHTML="";
- const centers={mujer:[300,260],sentido:[645,230],mente_rend:[985,265],habitos:[420,545],mente:[860,540]};
+ const centers={mujer:[265,250],sentido:[640,210],mente_rend:[1010,250],longevidad:[400,560],habitos:[760,560],mente:[1060,560]};
  const rB=v=>26+ (v-minI)/(maxI-minI)*44;
  TEMA.forEach(t=>{
   const [cxv,cyv]=centers[t.id];const kids=t.hijos.map(h=>DATA.find(d=>d.id===h));
@@ -727,7 +789,7 @@ function buildBubbles(){
    nm.textContent=d.nombre.length>16?d.nombre.slice(0,15)+"…":d.nombre;g.appendChild(nm);
    bub.appendChild(g);
    g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+d.tendencia;hintEl.style.color=d.color;});
-   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 13 nichos activos";hintEl.style.color="";});
+   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 17 nichos activos";hintEl.style.color="";});
    g.addEventListener("click",()=>openDetail(d.id));
   });
  });
@@ -761,7 +823,7 @@ function buildMatrix(){
    }
    mtx.appendChild(g);
    g.addEventListener("mouseenter",()=>{hintEl.textContent=d.nombre+" — índice "+d.indice+" · "+t.nombre;hintEl.style.color=d.color;});
-   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 13 nichos activos";hintEl.style.color="";});
+   g.addEventListener("mouseleave",()=>{hintEl.textContent="Mercado editorial KDP — 17 nichos activos";hintEl.style.color="";});
    g.addEventListener("click",()=>openDetail(d.id));
    yy+=rh;
   });
@@ -792,9 +854,16 @@ document.querySelectorAll(".mode-btn").forEach(b=>b.addEventListener("click",()=
  document.getElementById("vizTitle").textContent=META[m][0];
  document.getElementById("vizTag").textContent=META[m][1];
  document.getElementById("vizDesc").textContent=META[m][2];
- hintEl.textContent="Mercado editorial KDP — 13 nichos activos";hintEl.style.color="";
+ hintEl.textContent="Mercado editorial KDP — 17 nichos activos";hintEl.style.color="";
  clearFocus();
 }));
+
+/* ---------- TEMA CLARO / OSCURO ---------- */
+const themeBtn=document.getElementById("themeToggle");
+function applyTheme(t){document.body.classList.toggle("light",t==="light");themeBtn.textContent=t==="light"?"☾ Oscuro":"☀ Claro";}
+let savedTheme="dark";try{savedTheme=localStorage.getItem("kdp-theme")||"dark";}catch(e){}
+applyTheme(savedTheme);
+themeBtn.addEventListener("click",()=>{const now=document.body.classList.contains("light")?"dark":"light";applyTheme(now);try{localStorage.setItem("kdp-theme",now);}catch(e){}});
 </script>
 </body>
 </html>
