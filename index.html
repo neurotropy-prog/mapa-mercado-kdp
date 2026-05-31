@@ -92,7 +92,12 @@ svg{display:block;width:100%;height:auto}
 @media(max-width:760px){.bar{grid-template-columns:120px 1fr 40px;gap:10px}.bar .nm{font-size:12px}}
 
 /* FICHAS GRID */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.sortbar{display:flex;align-items:center;gap:8px;margin-top:18px;flex-wrap:wrap}
+.sortlbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-right:4px}
+.sort-btn{font-family:'Space Grotesk';font-size:12.5px;font-weight:500;color:var(--txt2);background:var(--panel);border:1px solid var(--line);padding:7px 14px;border-radius:8px;cursor:pointer;transition:.2s}
+.sort-btn:hover{color:var(--txt)}
+.sort-btn.active{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px #2c3346}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
 @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;
@@ -162,6 +167,8 @@ svg{display:block;width:100%;height:auto}
 .rev-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:4px}
 .rev-l.rev-plus{color:#5BC4A0}.rev-l.rev-minus{color:#E8763A}
 .rev-t{font-size:13px;color:var(--txt);line-height:1.45}
+.rev-pat{font-size:12.5px;color:var(--txt);line-height:1.5;padding:8px 0;border-top:1px solid var(--line)}
+.rev-pat:first-child{border-top:0;padding-top:2px}
 @media(max-width:600px){.sh-kpis{grid-template-columns:1fr}.sh-head h2{font-size:23px}.sh-ring,.sh-close{position:static;display:inline-flex;margin-top:10px}}
 footer{padding:48px 0 70px;color:var(--txt3);font-size:12.5px;font-weight:300;line-height:1.7}
 footer b{color:var(--txt2);font-weight:500}
@@ -210,6 +217,7 @@ footer b{color:var(--txt2);font-weight:500}
   <section class="sec">
     <div class="sec-h"><h2>Fichas de nicho</h2><span class="tag">/ datos Helium 10</span></div>
     <p class="sec-d">Cada ficha resume la oportunidad principal, la demanda documentada, el nivel de competencia y el desglose del índice: <b style="color:var(--txt);font-weight:500">D</b> demanda · <b style="color:var(--txt);font-weight:500">B</b> brecha · <b style="color:var(--txt);font-weight:500">P</b> profundidad · <b style="color:var(--txt);font-weight:500">I</b> ingresos.</p>
+    <div class="sortbar"><span class="sortlbl">Ordenar por</span><button class="sort-btn active" data-sort="indice">Índice</button><button class="sort-btn" data-sort="ingresos">Ingresos est.</button><button class="sort-btn" data-sort="demanda">Demanda</button></div>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -307,19 +315,99 @@ const DETAIL={
   k:[["nervio vago","906","0,85€"],["TDAH adultos","869","0,90€"],["regulación emocional","380","0,70€"],["dopamina libro","268","0,75€"],["salud cerebral","210","0,65€"],["teoría polivagal","151","0,60€"],["neurorregulación","NOT FOUND ↑↑↑","—"],["neuroplasticidad","0 (grupo 12.253)","0,40€"]]}
 };
 const REVIEWS={
- "salud-mujer":{v:"Lenguaje accesible y la sensación de «por fin entiendo mi cuerpo».",c:"Demasiada teoría; no cubre los síntomas cognitivos ni emocionales; falta plan por semanas.",n:"PAS mujer con perspectiva de género, brain fog perimenopáusico y protocolo práctico integral.",o:"Workbook hormonal que cubra TODOS los síntomas con 40% de práctica."},
- "espiritualidad":{v:"Transformación, inspiración y cambio de perspectiva.",c:"Demasiado abstracto o new age; muy largo y repetitivo; traducciones antiguas.",n:"Base científica para el lector escéptico, versión masculina y formato conciso de 150–180 págs.",o:"«Espiritualidad para escépticos» nativa en español, sin dogma y con humor."},
- "inteligencia":{v:"Fundamentos sólidos y autoridad del concepto (Goleman, Kahneman).",c:"Anticuado (1995), sin ejercicios; no habla de la era IA, redes ni trabajo remoto.",n:"IE masculina con rigor, IE para la era de la IA y formato breve accionable.",o:"Actualización de Goleman para la era digital con ejercicios en 21 días."},
- "relaciones":{v:"Cambian la perspectiva del vínculo; muy prácticos cuando aciertan.",c:"Ejemplos anticuados; sin autor clínico en español (Attached no tiene equivalente).",n:"Apego, narcisismo y gaslighting con protocolo aplicado y contexto hispano.",o:"Manual de apego para mujeres y protocolo de recuperación post-narcisista."},
- "adicciones":{v:"Narrativa personal y método sin fuerza de voluntad (Annie Grace).",c:"«Muy americano»; falta el capítulo para familias; falta plan práctico.",n:"Sober curious en español, libro para el familiar y workbook de recuperación.",o:"Recuperación con contexto cultural hispano y protocolo accionable."},
- "salud-mental":{v:"Lenguaje cercano del autor no-médico que «vivió» el problema.",c:"Demasiado teórico o alarmista; sin protocolo; con componente religioso no deseado.",n:"Ejercicios de sistema nervioso paso a paso, sin jerga y sin fe.",o:"«Despierta tu nervio vago» práctico en español, esperanzador y accionable."},
- "rendimiento":{v:"Frameworks probados y casos inspiradores (Measure What Matters).",c:"«Muy de Silicon Valley»; sin casos europeos ni hispanos; sin plantillas reales.",n:"OKRs, cultura y escalado para pymes hispanas con casos y herramientas.",o:"Libro original en español (no traducción) con casos de pyme y plantillas."},
- "ansiedad":{v:"Técnicas validadas y diagnóstico claro del problema.",c:"Pensado para mujeres; exceso de teoría; no aborda la ansiedad digital.",n:"Ansiedad masculina, nervio vago, dopamina y redes, y guía para padres.",o:"Workbook de ansiedad masculina con 90 ejercicios y lenguaje propio."},
- "apoyo-enfermedad":{v:"La voz personal que acompaña (Irene Villa, Megan Devine).",c:"Tono clínico y frío; poco práctico; los libros solo miran al enfermo.",n:"El cuidador pide libros que lo vean a él; duelo honesto sin las cinco fases.",o:"«El manual del cuidador» desde la experiencia vivida, con herramientas."},
- "burnout":{v:"Diagnóstico certero e identificación emocional (Nagoski, Tawwab).",c:"«Muy enfocado en mujeres»; sin plan semana a semana; falta el componente biológico.",n:"Burnout materno y masculino, y un protocolo de recuperación de verdad.",o:"Nicho hiperespecífico con 30% diagnóstico y 70% protocolo accionable."},
- "estres-postraumatico":{v:"Rigor y profundidad científica (El cuerpo lleva la cuenta).",c:"Demasiado clínico y largo; sin ejercicios prácticos para el día a día.",n:"Workbook somático en español con ejercicios de TRE, grounding y regulación vagal.",o:"La versión práctica del trauma para no clínicos, en 200 páginas."},
- "suenos":{v:"Fascinación por el tema y la curiosidad que despierta.",c:"Traducciones antiguas; productos de baja calidad sin base científica (reseñas 3,2★).",n:"Sueños lúcidos con base científica real y diario guiado con prompts psicológicos.",o:"Guía científica nativa en español, no traducción ni refrito."},
- "neurowellness":{v:"Ejercicios prácticos y base científica sólida (Rosenberg, Deb Dana).",c:"Demasiado técnico y poco visual; precio alto; repetitivo en los capítulos finales.",n:"Guía visual con rutinas de 5 minutos, protocolo semanal y ejercicios para el trabajo.",o:"Neurorregulación accesible para no clínicos — «neurorregulación» ni aparece en Helium 10 (gap absoluto)."}
+ "salud-mujer":{v:"Lenguaje accesible y la sensación de «por fin entiendo mi cuerpo» (Feliz menopausia, Sandra Moñino).",c:"Demasiada teoría con pocas herramientas; no cubren los síntomas cognitivos ni emocionales; falta un plan por semanas.",
+  p:["Ciclo y hormonas (Xusa Sanz, Lara Briden): «demasiada teoría, pocas herramientas», «no hay plan de semanas», «falta algo para hacer HOY». El libro ideal necesita ≥40% de contenido práctico.",
+     "Perimenopausia/menopausia: «muy enfocado en nutrición pero no habla de mis otros síntomas», «no hay nada sobre la cognición», «quería más sobre lo emocional». Oportunidad: cubrir TODOS los síntomas, incluidos los cognitivos y emocionales.",
+     "PAS/hipersensibilidad: «habla de personas en general; quiero algo sobre ser mujer PAS y mis relaciones, trabajo y maternidad». El PAS mujer con perspectiva de género es la necesidad nº1 documentada.",
+     "Endometriosis: «el médico habla muy técnico», «no hay recetas concretas», «falta un protocolo paso a paso». Lo ideal: experiencia vivida + protocolo antiinflamatorio + plan de 12 semanas + capítulo emocional.",
+     "Embarazo y parto: «falta sobre el postparto real», «no habla de la transformación de identidad al ser madre». El libro de matrescence / cuarto trimestre responde a la necesidad más expresada."],
+  o:"Workbook hormonal integral con ≥40% de práctica y los síntomas cognitivos y emocionales que nadie cubre."},
+ "espiritualidad":{v:"Transformación, inspiración y cambio de perspectiva (Tolle, Singer, Dispenza).",c:"Demasiado abstracto o new age; muy largo y repetitivo; traducciones antiguas de baja calidad.",
+  p:["«Demasiado abstracto / no sé cómo aplicarlo»: en reseñas de Tolle, Kabat-Zinn y Frankl. El lector valora el contenido pero no sabe llevarlo a la rutina. Oportunidad: workbooks y guías de ejercicios.",
+     "«Muy new age / necesito base científica»: en reseñas de Dispenza, Chopra y la física cuántica espiritual. El escéptico es un lector enorme y mal atendido (CI=3 en Amazon.es).",
+     "«Para mujeres / no conecta con hombres»: «david deida» +67% confirma que el hombre busca contenido espiritual con un tono que le hable. Gap masculino máximo.",
+     "«La traducción es mala / necesito versión en español de calidad»: Tolle recibe críticas por traducciones antiguas. Raimon Samsó demuestra que el mercado premia la voz española auténtica.",
+     "«Muy largo / repetitivo / podría ser la mitad»: universal en Kabat-Zinn (600+ págs) y Dispenza (400+). Oportunidad: libro conciso y denso de 150–180 páginas."],
+  o:"«Espiritualidad para escépticos» nativa en español, con base científica, tono masculino disponible y formato conciso."},
+ "inteligencia":{v:"Fundamentos científicos sólidos y autoridad del concepto (Goleman, Kahneman, Brackett).",c:"Anticuados (Goleman es de 1995), sin ejercicios; no cubren la era IA, las redes ni el trabajo remoto.",
+  p:["Goleman — Inteligencia Emocional (42.156 reseñas): «muy académico y teórico, pocas herramientas, sin ejercicios». Necesidad: guía IE práctica con ejercicios paso a paso.",
+     "EI 2.0 (Bradberry): incluye test pero «repetitivo, demasiado enfocado en empresa, no cubre la vida personal». Necesidad: versión ES con enfoque doble, personal y profesional.",
+     "Dont Believe Everything You Think (78.234 reseñas): «corto y accesible» pero «muy superficial, sin base científica». Necesidad: libro breve (<150 págs) anti-rumiación con base neuro real.",
+     "Limitless (Jim Kwik): «métodos prácticos» pero «muy largo, autopromoción excesiva, sin evidencia rigurosa». Necesidad: guía compacta con protocolos diarios de 15–20 min.",
+     "Kahneman / Dobelli: «explican los sesgos pero no dan herramientas para aplicarlos». Necesidad: pensamiento crítico práctico con ejercicios y contexto de fake news (keyword 37 vol = gap)."],
+  o:"Actualización de Goleman para la era IA y digital, con ejercicios en 21 días, y una IE masculina con rigor."},
+ "relaciones":{v:"Cambian la perspectiva del vínculo; muy prácticos cuando el autor acierta con el tono.",c:"Ejemplos anticuados y, sobre todo, ausencia de autor clínico en español: Attached (4M ventas) no tiene equivalente.",
+  p:["Apego: Attached vende millones en inglés y no tiene equivalente en español de autor clínico. Gap masivo confirmado.",
+     "Narcisismo: es top-5 de búsquedas en YouTube en español sin un libro definitivo. Búsquedas exponenciales.",
+     "Codependencia: Melodie Beattie vende 8.000+/mes en inglés; Amazon.es no tiene un equivalente real.",
+     "Gaslighting y love bombing: términos virales en redes sin libros específicos en Amazon.es.",
+     "Mercado masculino infraatendido: apego evitativo, codependencia y soledad masculina tienen cero libros en español.",
+     "Formato: el workbook vende un 40% más que el narrativo y no existen workbooks de apego en español."],
+  o:"Manual de apego para mujeres y protocolo de recuperación post-narcisista, con workbook y contexto hispano."},
+ "adicciones":{v:"Narrativa personal y método sin fuerza de voluntad (Annie Grace, This Naked Mind).",c:"«Muy americano»; falta el capítulo para familias; falta un plan práctico accionable.",
+  p:["«Falta contexto cultural no-anglosajón» (100% de libros): «esto es muy americano», «el botellón o las tapas no existen aquí». El gap de entrada más obvio.",
+     "«Piden workbook / plan práctico» (85%): Maté y Lembke reciben «muy teórico, sin plan práctico». El workbook companion es un segundo libro casi garantizado.",
+     "«Necesito versión para hombres / mujeres» (70%): Quit Like a Woman deja un hueco masculino enorme («dónde está el libro para hombres»).",
+     "«Sin capítulo para familias» (100%): el patrón más universal. «Cómo ayudar a mi pareja/hijo», «necesito un libro para el que convive con el adicto».",
+     "«Piden versión en español» (60%): This Naked Mind (18.000+) y Dopamine Nation (12.000+) reciben «cuándo saldrá en español»."],
+  o:"Sober curious en español con contexto cultural hispano, un libro para las familias y un workbook de recuperación."},
+ "salud-mental":{v:"El lenguaje cercano del autor no-médico que «vivió» el problema (Nguyen, Clear, Hari).",c:"Demasiado teórico o alarmista; sin protocolo; con un componente religioso que muchos no quieren.",
+  p:["«Quiero práctica, no teoría»: lectores de The Body Keeps the Score y Why We Sleep piden más ejercicios y protocolos concretos. Oportunidad: workbooks y guías paso a paso.",
+     "«Para mi género / grupo»: Burnout de Nagoski excluye a los hombres; Carnegie pide actualización para jóvenes. Oportunidad: libros específicos por demografía.",
+     "«Sin el componente religioso»: repetido en las reseñas de Marian Rojas Estapé. Lectores seculares quieren el mismo contenido neurocientífico sin las referencias a la fe.",
+     "«Demasiado alarmista / académico»: Matthew Walker y van der Kolk reciben «menos académico, menos largo, más esperanza».",
+     "«Quiero esto en mi idioma / cultura»: en ES, MX, DE, IT y BR valoran enormemente cuando el autor habla de su contexto cultural."],
+  o:"«Despierta tu nervio vago» práctico en español, sin componente religioso, esperanzador y con protocolo."},
+ "rendimiento":{v:"Frameworks probados y casos inspiradores (Measure What Matters, Good to Great).",c:"«Muy de Silicon Valley»; sin casos europeos ni hispanos; sin plantillas listas para usar.",
+  p:["OKRs: sin equivalente de Measure What Matters en español. Las reseñas piden checklists y plantillas con casos de pyme (vol búsqueda ES 890/mes).",
+     "Primer manager: las reseñas piden «versión en español y casos no tech» (vol 3.200/mes). El manager sin formación es un público enorme.",
+     "Cultura y escalado: «piden casos fuera de EE.UU. y Silicon Valley», versión para empresas de servicios y contexto europeo.",
+     "Liderazgo: «piden algo pragmático y directo, sin el storytelling motivacional americano».",
+     "Reuniones y sistemas: EOS/Traction sin implementador externo; «documentar y delegar» para el emprendedor hispanohablante sin consultor."],
+  o:"Libro original en español (no traducción) de OKRs y cultura para pymes, con casos hispanos y plantillas."},
+ "ansiedad":{v:"Técnicas validadas y un diagnóstico claro del problema (TCC, ACT).",c:"Pensado para mujeres; exceso de teoría; no aborda la ansiedad digital ni el componente neurocientífico.",
+  p:["«El vacío de contenido para hombres»: ~34% de las reseñas negativas de bestsellers vienen de hombres («está pensado para mujeres», «los ejemplos no aplican a mi vida»).",
+     "«Exceso de teoría, déficit de ejercicios»: sobre todo en libros de Perfil B (médicos). «Lo leí pero no supe qué hacer con la información». El formato workbook lo resuelve.",
+     "«Ansiedad en la era digital, tema ausente»: «esto se escribió antes de Instagram», «no habla del scroll compulsivo». Necesidad: FOMO, comparación social, dopamina y detox digital.",
+     "«Falta perspectiva neurocientífica divulgada»: lectores universitarios piden «por qué funciona esto», «qué pasa en mi cerebro durante un ataque de pánico».",
+     "«Ausencia de guías para padres de hijos con ansiedad»: «mi hijo tiene ansiedad, qué hago» mueve 8.000–12.000 búsquedas/mes con títulos muy limitados."],
+  o:"Workbook de ansiedad masculina con 90 ejercicios, más una línea sobre nervio vago y ansiedad digital."},
+ "apoyo-enfermedad":{v:"La voz personal que acompaña desde dentro (Irene Villa, Megan Devine, Toni Bernhard).",c:"Tono clínico y frío; poco práctico; los libros miran solo al enfermo y olvidan al cuidador.",
+  p:["«Tono frío — quiero sentirme acompañado, no diagnosticado»: el patrón más repetido. «Esperaba más calidez», «me siento un número, no una persona», «el médico me explica pero no me acompaña».",
+     "«Practicidad — herramientas para hoy, no teoría»: «más práctico por favor», «quiero las preguntas que tengo que hacer, no la teoría». El lector enfermo tiene energía limitada.",
+     "«El cuidador pide libros que lo vean a él»: «toda la información es para el enfermo, yo también necesito ayuda», «quién me cuida a mí». El mercado del cuidador es mayor que el del paciente.",
+     "«No en español — busco el equivalente de [libro anglosajón]»: It's OK That You're Not OK y How to Be Sick reciben peticiones de versión en español en sus propias reseñas.",
+     "«Duelo específico — para MI tipo de pérdida»: pérdida perinatal, duelo anticipatorio, duelo por demencia o por divorcio. Nichos de alta intención y baja competencia."],
+  o:"«El manual del cuidador» desde la experiencia vivida, y un duelo honesto sin las cinco fases."},
+ "burnout":{v:"Diagnóstico certero e identificación emocional (Nagoski, Tawwab).",c:"«Muy enfocado en mujeres»; sin plan semana a semana; falta el componente físico y biológico.",
+  p:["«Falta el plan concreto»: Nagoski, Can't Even y Guide du burn-out. «Muy teórico, necesito ejercicios paso a paso». El lector sale sin saber QUÉ HACER.",
+     "«No me refleja — falta mi colectivo»: «muy enfocado en mujeres, falta versión para hombres», «y los emprendedores», «muy americano, no refleja mi realidad».",
+     "«Sin el componente físico/biológico»: «quiero entender qué le pasa a mi cuerpo, el cortisol, la tiroides, el sistema nervioso». Oportunidad de Perfil B en castellano.",
+     "«Muy general — necesito mi situación específica»: «mi burnout como madre es diferente al de oficina», «los autónomos no podemos coger una baja».",
+     "«El libro no termina con soluciones»: «demasiadas páginas de causas y pocas de soluciones». Oportunidad: invertir la proporción a 30% diagnóstico + 70% protocolo."],
+  o:"Burnout materno y masculino con 70% de protocolo de recuperación, no de diagnóstico."},
+ "estres-postraumatico":{v:"Rigor y profundidad científica (El cuerpo lleva la cuenta, van der Kolk).",c:"Demasiado clínico y largo; sin ejercicios prácticos para el día a día.",
+  p:["«Quiero un workbook»: «workbook» es el término más repetido (305) del clúster de ptsd workbook (328.322 búsquedas). «El cuerpo lleva la cuenta» (CI 21.500) sin workbook equivalente = el gap más grande.",
+     "«Demasiado clínico / quiero algo práctico»: los lectores buscan alternativas accionables; «healing» (361) supera a «therapy» (149). El workbook supera al libro narrativo en conversión.",
+     "«Quiero ejercicios concretos para mi cuerpo»: demanda de ejercicios corporales (body 155, vagus 95, somatic 76). Sin equivalente en español.",
+     "«En español para mi cultura»: la alta CI en ES (trauma y recuperación 22.727) indica demanda específica de contenido en español; «trauma and recovery español» aparece en el autocomplete.",
+     "«Sin jerga / para no especialistas»: búsqueda de libros de divulgación, no manuales clínicos (libro, terapia, manual frente a book/books en inglés)."],
+  o:"Workbook de trauma somático en español con ejercicios de TRE, grounding y regulación vagal, para no clínicos."},
+ "suenos":{v:"La fascinación por el tema y la curiosidad masiva que despierta.",c:"Traducciones antiguas y productos KDP de baja calidad, algunos con contenido plagiado (reseñas 3,0–3,4★).",
+  p:["Sueños lúcidos: los pocos títulos existentes están en 3,2★, «compradores decepcionados». Cero libros de calidad = gap máximo.",
+     "Diario / workbook de sueños: el modelo workbook es best-seller en inglés ($8.99, 6.800 reseñas) sin ningún equivalente en español.",
+     "Interpretación de sueños: el referente (Murphree) tiene 4,1★ y 320 reseñas pero está «desactualizado y sin base psicológica».",
+     "Mercados sin explotar: en BR, IT, FR y DE los pocos títulos KDP tienen 8–35 reseñas con 2,7–3,4★ = mercado vacío de calidad.",
+     "Sueños para niños: «sueños infantiles significado» (+28%) sin libros de calidad para padres y educadores."],
+  o:"Guía científica nativa en español de sueños lúcidos y un diario guiado con prompts psicológicos."},
+ "neurowellness":{v:"Ejercicios prácticos y base científica sólida (Rosenberg, Deb Dana).",c:"Demasiado técnico y poco visual; precio alto; repetitivo en los capítulos finales.",
+  p:["Rosenberg — Accessing the Healing Power of the Vagus Nerve (4.200 reseñas, 4,6★): valoran los ejercicios prácticos y el alivio del dolor crónico; critican que es muy técnico, poco visual y caro. Necesidad: guía más visual con rutinas de solo 5 min.",
+     "Deb Dana — Anchored (CI 128.444, bestseller EN): valoran las aplicaciones prácticas y la accesibilidad; critican la falta de profundidad científica y que es repetitivo. Necesidad: ejercicios para el ámbito laboral y un protocolo semanal.",
+     "Das Trauma in Dir (DE, vol 1.020): valoran la base científica sólida; critican que es «demasiado teórico para aplicar» y sin versión digital económica. Oportunidad: versión práctica con ejercicios del nervio vago.",
+     "Driven to Distraction / ADHD 2.0 (Hallowell & Ratey): valoran que validan la experiencia del TDAH adulto; critican que están desactualizados y son «muy clínicos, con pocas herramientas». Necesidad: TDAH adultos con tono positivo y herramientas digitales.",
+     "Scattered Minds (Gabor Maté, 8.900 reseñas): valoran que es compasivo y revelador; critican que «no da herramientas prácticas, es muy teórico». Necesidad: manual práctico con sus ideas + ejercicios reales.",
+     "Dopamine Nation (Anna Lembke, 18.000 reseñas): valoran que es revelador; critican que se enfoca en la adicción y no en la optimización. Necesidad: dopamina para rendir mejor, no solo para adictos."],
+  o:"Neurorregulación accesible para no clínicos — «neurorregulación» ni siquiera aparece en Helium 10 (gap absoluto)."}
 };
 
 /* ---------- FAN CHART ---------- */
@@ -438,6 +526,21 @@ DATA.forEach(d=>{
     <div class="kw">${kws}</div>`;
   grid.appendChild(c);
 });
+/* ---------- ORDENAR FICHAS ---------- */
+function ingNum(d){const m=(d.ingresos.match(/[0-9][0-9.]*/g)||[]).map(s=>parseInt(s.replace(/\./g,''),10)).filter(n=>!isNaN(n));return m.length?Math.max(...m):0;}
+function sortGrid(key){
+ const arr=[...DATA];
+ if(key==="ingresos")arr.sort((a,b)=>ingNum(b)-ingNum(a));
+ else if(key==="demanda")arr.sort((a,b)=>(b.D-a.D)||(b.indice-a.indice));
+ else arr.sort((a,b)=>b.indice-a.indice);
+ arr.forEach(d=>{const el=document.getElementById("card-"+d.id);if(el)grid.appendChild(el);});
+}
+document.querySelectorAll(".sort-btn").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".sort-btn").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); sortGrid(b.dataset.sort);
+}));
+sortGrid("indice");
+
 function flash(id){const el=document.getElementById("card-"+id);el.animate([{boxShadow:"0 0 0 0 "+DATA.find(d=>d.id===id).color+"00"},{boxShadow:"0 0 0 3px "+DATA.find(d=>d.id===id).color+"66"},{boxShadow:"0 0 0 0 transparent"}],{duration:1200});}
 
 /* ---------- FICHA AMPLIADA (modal) ---------- */
@@ -454,11 +557,12 @@ function openDetail(id){
  const SUB=[["D","Demanda",d.D],["G","Brecha",d.G],["P","Profundidad",d.P],["R","Ingresos",d.R]];
  const sub=SUB.map(s=>`<div class="sbcol"><div class="bw"><div class="b" style="height:${s[2]*10}%;background:${d.color}"></div></div><div class="lab">${s[0]} ${s[2]}</div></div>`).join("");
  const rv=REVIEWS[id]||{};
+ const pats=(rv.p||[]).map(x=>`<div class="rev-pat">${x}</div>`).join("");
  const revBlock=rv.v?`<h4>Análisis de reseñas</h4>
     <div class="rev"><div class="rev-l rev-plus">Lo que valoran</div><div class="rev-t">${rv.v}</div></div>
     <div class="rev"><div class="rev-l rev-minus">Lo que critican</div><div class="rev-t">${rv.c}</div></div>
-    <div class="rev"><div class="rev-l">Necesidad no cubierta</div><div class="rev-t">${rv.n}</div></div>
-    <div class="rev" style="border-left:2px solid ${d.color}"><div class="rev-l" style="color:${d.color}">Oportunidad</div><div class="rev-t">${rv.o}</div></div>`:"";
+    <div class="rev"><div class="rev-l">Necesidades no cubiertas · patrones de reseñas</div>${pats}</div>
+    <div class="rev" style="border-left:2px solid ${d.color}"><div class="rev-l" style="color:${d.color}">Oportunidad principal</div><div class="rev-t">${rv.o}</div></div>`:"";
  sheet.innerHTML=`
   <div class="sh-head" style="border-bottom:1px solid var(--line)">
     <div class="clu" style="color:${d.color}">${CLUSTERS[d.cluster].nombre}</div>
